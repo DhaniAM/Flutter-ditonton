@@ -1,6 +1,11 @@
-# a199-flutter-expert-project
+# a199-flutter-expert-project / Ditonton
 
 Repository ini merupakan starter project submission kelas Flutter Expert Dicoding Indonesia.
+
+---
+
+Original repository: https://github.com/dicodingacademy/a199-flutter-expert-project/tree/main ,
+This repository is created on this account so github will count my commits towards daily contributions
 
 ---
 

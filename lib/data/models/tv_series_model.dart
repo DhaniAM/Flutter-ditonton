@@ -1,3 +1,4 @@
+import 'package:ditonton/domain/entities/tv_series.dart';
 import 'package:equatable/equatable.dart';
 
 class TvSeriesModel extends Equatable {
@@ -30,6 +31,56 @@ class TvSeriesModel extends Equatable {
   final int voteCount;
   final String name;
   final String originalName;
+
+  factory TvSeriesModel.fromJson(Map<String, dynamic> json) => TvSeriesModel(
+        posterPath: json['poster_path'],
+        popularity: json['popularity'],
+        id: json['id'],
+        backdropPath: json['backdrop_path'],
+        voteAverage: json['vote_average'],
+        overview: json['overview'],
+        firstAirDate: json['first_air_date'],
+        originCountry: json['origin_country'],
+        genreIds: json['genre_ids'],
+        originalLanguage: json['original_language'],
+        voteCount: json['vote_count'],
+        name: json['name'],
+        originalName: json['original_name'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'poster_path': posterPath,
+        'popularity': popularity,
+        'id': id,
+        'backdrop_path': backdropPath,
+        'vote_average': voteAverage,
+        'overview': overview,
+        'first_air_date': firstAirDate,
+        'origin_country': originCountry,
+        'genre_ids': genreIds,
+        'original_language': originalLanguage,
+        'vote_count': voteCount,
+        'name': name,
+        'originalName': originalName,
+      };
+
+  TvSeries toEntity() {
+    return TvSeries(
+      posterPath: posterPath,
+      popularity: popularity,
+      id: id,
+      backdropPath: backdropPath,
+      voteAverage: voteAverage,
+      overview: overview,
+      firstAirDate: firstAirDate,
+      originCountry: originCountry,
+      genreIds: genreIds,
+      originalLanguage: originalLanguage,
+      voteCount: voteCount,
+      name: name,
+      originalName: originalName,
+    );
+  }
 
   @override
   List<Object?> get props => [

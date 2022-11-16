@@ -201,11 +201,11 @@ class MockDatabaseHelper extends _i1.Mock implements _i15.DatabaseHelper {
               returnValue: Future<_i16.Database?>.value())
           as _i7.Future<_i16.Database?>);
   @override
-  _i7.Future<int> insertWatchlist(_i14.MovieTable? movie) =>
+  _i7.Future<int> insertMovieWatchlist(_i14.MovieTable? movie) =>
       (super.noSuchMethod(Invocation.method(#insertWatchlist, [movie]),
           returnValue: Future<int>.value(0)) as _i7.Future<int>);
   @override
-  _i7.Future<int> removeWatchlist(_i14.MovieTable? movie) =>
+  _i7.Future<int> removeMovieWatchlist(_i14.MovieTable? movie) =>
       (super.noSuchMethod(Invocation.method(#removeWatchlist, [movie]),
           returnValue: Future<int>.value(0)) as _i7.Future<int>);
   @override
@@ -214,11 +214,10 @@ class MockDatabaseHelper extends _i1.Mock implements _i15.DatabaseHelper {
               returnValue: Future<Map<String, dynamic>?>.value())
           as _i7.Future<Map<String, dynamic>?>);
   @override
-  _i7.Future<List<Map<String, dynamic>>> getWatchlistMovies() =>
-      (super.noSuchMethod(Invocation.method(#getWatchlistMovies, []),
-              returnValue: Future<List<Map<String, dynamic>>>.value(
-                  <Map<String, dynamic>>[]))
-          as _i7.Future<List<Map<String, dynamic>>>);
+  _i7.Future<List<Map<String, dynamic>>> getWatchlist() => (super.noSuchMethod(
+      Invocation.method(#getWatchlistMovies, []),
+      returnValue: Future<List<Map<String, dynamic>>>.value(
+          <Map<String, dynamic>>[])) as _i7.Future<List<Map<String, dynamic>>>);
 }
 
 /// A class which mocks [Client].

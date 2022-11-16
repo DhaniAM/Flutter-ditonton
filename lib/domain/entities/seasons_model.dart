@@ -6,7 +6,7 @@ class SeasonsModel extends Equatable {
     required this.airDate,
     required this.episodeCount,
     required this.id,
-    required this.name,
+    required this.title,
     required this.overview,
     required this.posterPath,
     required this.seasonNumber,
@@ -15,7 +15,7 @@ class SeasonsModel extends Equatable {
   final String airDate;
   final int episodeCount;
   final int id;
-  final String name;
+  final String title;
   final String overview;
   final String posterPath;
   final int seasonNumber;
@@ -24,7 +24,7 @@ class SeasonsModel extends Equatable {
         airDate: json['air_date'],
         episodeCount: json['episode_count'],
         id: json['id'],
-        name: json['name'],
+        title: json['name'],
         overview: json['overview'],
         posterPath: json['poster_path'],
         seasonNumber: json['season_number'],
@@ -34,7 +34,7 @@ class SeasonsModel extends Equatable {
         'airDate': airDate,
         'episodeCount': episodeCount,
         'id': id,
-        'name': name,
+        'title': title,
         'overview': overview,
         'posterPath': posterPath,
         'seasonNumber': seasonNumber,
@@ -45,7 +45,7 @@ class SeasonsModel extends Equatable {
         airDate: airDate,
         episodeCount: episodeCount,
         id: id,
-        title: name,
+        title: title,
         overview: overview,
         posterPath: posterPath,
         seasonNumber: seasonNumber);
@@ -55,7 +55,7 @@ class SeasonsModel extends Equatable {
         airDate,
         episodeCount,
         id,
-        name,
+        title,
         overview,
         posterPath,
         seasonNumber,

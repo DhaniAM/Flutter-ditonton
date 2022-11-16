@@ -13,7 +13,7 @@ class TvSeries extends Equatable {
     required this.genreIds,
     required this.originalLanguage,
     required this.voteCount,
-    required this.name,
+    required this.title,
     required this.originalName,
   });
 
@@ -21,7 +21,7 @@ class TvSeries extends Equatable {
     required this.id,
     required this.posterPath,
     required this.overview,
-    required this.name,
+    required this.title,
   });
 
   String? posterPath;
@@ -35,7 +35,7 @@ class TvSeries extends Equatable {
   List<int>? genreIds;
   String? originalLanguage;
   int? voteCount;
-  String name;
+  String title;
   String? originalName;
 
   @override
@@ -51,7 +51,7 @@ class TvSeries extends Equatable {
         genreIds,
         originalLanguage,
         voteCount,
-        name,
+        title,
         originalName
       ];
 }

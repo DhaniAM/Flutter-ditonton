@@ -9,7 +9,7 @@ class TvSeriesDetail extends Equatable {
     required this.lastAirDate,
     required this.genres,
     required this.id,
-    required this.name,
+    required this.title,
     required this.numberOfEpisodes,
     required this.numberOfSeasons,
     required this.overview,
@@ -25,7 +25,7 @@ class TvSeriesDetail extends Equatable {
   final String lastAirDate;
   final List<Genre> genres;
   final int id;
-  final String name;
+  final String title;
   final int numberOfEpisodes;
   final int numberOfSeasons;
   final String overview;
@@ -42,7 +42,7 @@ class TvSeriesDetail extends Equatable {
         lastAirDate,
         genres,
         id,
-        name,
+        title,
         numberOfSeasons,
         numberOfEpisodes,
         overview,

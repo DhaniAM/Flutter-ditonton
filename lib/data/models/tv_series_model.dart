@@ -14,7 +14,7 @@ class TvSeriesModel extends Equatable {
     required this.genreIds,
     required this.originalLanguage,
     required this.voteCount,
-    required this.name,
+    required this.title,
     required this.originalName,
   });
 
@@ -29,7 +29,7 @@ class TvSeriesModel extends Equatable {
   final List<int> genreIds;
   final String originalLanguage;
   final int voteCount;
-  final String name;
+  final String title;
   final String originalName;
 
   factory TvSeriesModel.fromJson(Map<String, dynamic> json) => TvSeriesModel(
@@ -44,7 +44,7 @@ class TvSeriesModel extends Equatable {
         genreIds: json['genre_ids'],
         originalLanguage: json['original_language'],
         voteCount: json['vote_count'],
-        name: json['name'],
+        title: json['name'],
         originalName: json['original_name'],
       );
 
@@ -60,7 +60,7 @@ class TvSeriesModel extends Equatable {
         'genre_ids': genreIds,
         'original_language': originalLanguage,
         'vote_count': voteCount,
-        'name': name,
+        'title': title,
         'originalName': originalName,
       };
 
@@ -77,7 +77,7 @@ class TvSeriesModel extends Equatable {
       genreIds: genreIds,
       originalLanguage: originalLanguage,
       voteCount: voteCount,
-      name: name,
+      title: title,
       originalName: originalName,
     );
   }
@@ -95,7 +95,7 @@ class TvSeriesModel extends Equatable {
         genreIds,
         originalLanguage,
         voteCount,
-        name,
+        title,
         originalName
       ];
 }

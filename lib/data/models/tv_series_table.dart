@@ -44,6 +44,7 @@ class TvSeriesTable extends Equatable {
         title: title,
       );
 
+  @override
   List<Object?> get props => [
         id,
         title,

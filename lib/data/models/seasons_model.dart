@@ -51,6 +51,7 @@ class SeasonsModel extends Equatable {
         seasonNumber: seasonNumber);
   }
 
+  @override
   List<Object> get props => [
         airDate,
         episodeCount,

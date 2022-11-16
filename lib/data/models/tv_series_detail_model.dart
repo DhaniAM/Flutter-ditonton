@@ -1,4 +1,5 @@
 import 'package:ditonton/data/models/genre_model.dart';
+import 'package:ditonton/data/models/seasons_model.dart';
 import 'package:ditonton/domain/entities/tv_series_detail.dart';
 import 'package:equatable/equatable.dart';
 
@@ -30,76 +31,82 @@ class TvSeriesDetailResponse extends Equatable {
   final int numberOfSeasons;
   final String overview;
   final String? posterPath;
-  final List<Seasons> seasons;
+  final List<SeasonsModel> seasons;
   final String tagline;
   final double voteAverage;
   final int voteCount;
 
   factory TvSeriesDetailResponse.fromJson(Map<String, dynamic> json) =>
       TvSeriesDetailResponse(
-        posterPath: json['poster_path'],
-        popularity: json['popularity'],
-        id: json['id'],
         backdropPath: json['backdrop_path'],
-        voteAverage: json['vote_average'],
-        overview: json['overview'],
         firstAirDate: json['first_air_date'],
-        originCountry: json['origin_country'],
-        genreIds: json['genre_ids'],
-        originalLanguage: json['original_language'],
-        voteCount: json['vote_count'],
+        lastAirDate: json['last_air_date'],
+        genres: List<GenreModel>.from(
+            json['genres'].map((x) => GenreModel.fromJson(x))),
+        id: json['id'],
         title: json['name'],
-        originalName: json['original_name'],
+        numberOfEpisodes: json['number_of_episodes'],
+        numberOfSeasons: json['number_of_seasons'],
+        overview: json['overview'],
+        posterPath: json['poster_path'],
+        seasons: List<SeasonsModel>.from(
+            json['seasons'].map((x) => SeasonsModel.fromJson(x))),
+        tagline: json['tagline'],
+        voteAverage: json['vote_average'],
+        voteCount: json['vote_count'],
       );
 
   Map<String, dynamic> toJson() => {
-        'poster_path': posterPath,
-        'popularity': popularity,
-        'id': id,
         'backdrop_path': backdropPath,
-        'vote_average': voteAverage,
-        'overview': overview,
         'first_air_date': firstAirDate,
-        'origin_country': originCountry,
-        'genre_ids': genreIds,
-        'original_language': originalLanguage,
-        'vote_count': voteCount,
+        'last_air_Date': lastAirDate,
+        'genres': List<dynamic>.from(genres.map((x) => x.toJson())),
+        'id': id,
         'title': title,
-        'originalName': originalName,
+        'number_of_episodes': numberOfEpisodes,
+        'number_of_seasons': numberOfSeasons,
+        'overview': overview,
+        'poster_path': posterPath,
+        'seasons': List<dynamic>.from(seasons.map((x) => x.toJson())),
+        'tagline': tagline,
+        'vote_average': voteAverage,
+        'vote_count': voteCount,
       };
 
   TvSeriesDetail toEntity() {
     return TvSeriesDetail(
-      posterPath: posterPath,
-      popularity: popularity,
-      id: id,
       backdropPath: backdropPath,
-      voteAverage: voteAverage,
-      overview: overview,
       firstAirDate: firstAirDate,
-      originCountry: originCountry,
-      genreIds: genreIds,
-      originalLanguage: originalLanguage,
-      voteCount: voteCount,
+      lastAirDate: lastAirDate,
+      genres: genres.map((x) => x.toEntity()).toList(),
+      id: id,
       title: title,
-      originalName: originalName,
+      numberOfEpisodes: numberOfEpisodes,
+      numberOfSeasons: numberOfSeasons,
+      overview: overview,
+      posterPath: posterPath,
+      seasons: seasons.map((x) => x.toEntity()).toList(),
+      tagline: tagline,
+      voteAverage: voteAverage,
+      voteCount: voteCount,
     );
   }
 
   @override
   List<Object?> get props => [
-        posterPath,
-        popularity,
-        id,
         backdropPath,
-        voteAverage,
-        overview,
         firstAirDate,
-        originCountry,
-        genreIds,
-        originalLanguage,
-        voteCount,
+        lastAirDate,
+        genres,
+        id,
         title,
-        originalName
+        numberOfEpisodes,
+        numberOfSeasons,
+        overview,
+        posterPath,
+        seasons,
+        tagline,
+        voteAverage,
+        voteCount,
       ];
 }

@@ -49,6 +49,7 @@ final testMovieTable = MovieTable(
   title: 'title',
   posterPath: 'posterPath',
   overview: 'overview',
+  type: 'movie',
 );
 
 final testMovieMap = {

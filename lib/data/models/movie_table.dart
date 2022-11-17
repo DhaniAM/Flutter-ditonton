@@ -7,12 +7,14 @@ class MovieTable extends Equatable {
   final String? title;
   final String? posterPath;
   final String? overview;
+  final String type;
 
   MovieTable({
     required this.id,
     required this.title,
     required this.posterPath,
     required this.overview,
+    required this.type,
   });
 
   /// Change from MovieDetail to MovieTable, to get saved on Database
@@ -21,6 +23,7 @@ class MovieTable extends Equatable {
         title: movie.title,
         posterPath: movie.posterPath,
         overview: movie.overview,
+        type: 'movie',
       );
 
   /// from Database (JSON)
@@ -29,6 +32,7 @@ class MovieTable extends Equatable {
         title: map['title'],
         posterPath: map['posterPath'],
         overview: map['overview'],
+        type: map['type'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -36,6 +40,7 @@ class MovieTable extends Equatable {
         'title': title,
         'posterPath': posterPath,
         'overview': overview,
+        'type': 'movie',
       };
 
   Movie toEntity() => Movie.watchlist(
@@ -46,10 +51,5 @@ class MovieTable extends Equatable {
       );
 
   @override
-  List<Object?> get props => [
-        id,
-        title,
-        posterPath,
-        overview,
-      ];
+  List<Object?> get props => [id, title, posterPath, overview, type];
 }

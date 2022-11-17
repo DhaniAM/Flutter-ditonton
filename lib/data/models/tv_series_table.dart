@@ -35,6 +35,7 @@ class TvSeriesTable extends Equatable {
         'title': title,
         'posterPath': posterPath,
         'overview': overview,
+        'type': 'tvSeries',
       };
 
   TvSeries toEntity() => TvSeries.watchlist(

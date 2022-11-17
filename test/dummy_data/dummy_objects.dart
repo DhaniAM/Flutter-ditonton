@@ -2,6 +2,8 @@ import 'package:ditonton/data/models/movie_table.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
+import 'package:ditonton/domain/entities/seasons.dart';
+import 'package:ditonton/domain/entities/tv_series_detail.dart';
 
 final testMovie = Movie(
   adult: false,
@@ -35,6 +37,32 @@ final testMovieDetail = MovieDetail(
   title: 'title',
   voteAverage: 1,
   voteCount: 1,
+);
+
+final testTvSeriesDetail = TvSeriesDetail(
+  overview: 'overview',
+  posterPath: 'posterPath',
+  voteCount: 99,
+  firstAirDate: 'firstAirDate',
+  voteAverage: 10.5,
+  backdropPath: 'backdropPath',
+  genres: [Genre(id: 1, name: 'Fantasy')],
+  id: 1,
+  lastAirDate: 'lastAirDate',
+  numberOfEpisodes: 22,
+  numberOfSeasons: 5,
+  seasons: [
+    Seasons(
+        airDate: 'airDate',
+        episodeCount: 22,
+        id: 1,
+        title: 'title',
+        overview: 'overview',
+        posterPath: 'posterPath',
+        seasonNumber: 2)
+  ],
+  tagline: 'tagline',
+  title: 'title',
 );
 
 final testWatchlistMovie = Movie.watchlist(

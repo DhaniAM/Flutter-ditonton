@@ -11,13 +11,13 @@ class Seasons extends Equatable {
     required this.seasonNumber,
   });
 
-  final String airDate;
-  final int episodeCount;
+  final String? airDate;
+  final int? episodeCount;
   final int id;
-  final String title;
-  final String overview;
-  final String posterPath;
-  final int seasonNumber;
+  final String? title;
+  final String? overview;
+  final String? posterPath;
+  final int? seasonNumber;
 
   @override
   List<Object?> get props =>

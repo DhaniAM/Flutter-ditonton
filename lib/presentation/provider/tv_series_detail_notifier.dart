@@ -1,9 +1,9 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/tv_series.dart';
 import 'package:ditonton/domain/entities/tv_series_detail.dart';
-import 'package:ditonton/domain/usecases/get_movie_watchlist_status.dart';
 import 'package:ditonton/domain/usecases/get_tv_series_detail.dart';
 import 'package:ditonton/domain/usecases/get_tv_series_recommendations.dart';
+import 'package:ditonton/domain/usecases/get_tv_series_watchlist_status.dart';
 import 'package:ditonton/domain/usecases/remove_tv_series_watchlist.dart';
 import 'package:ditonton/domain/usecases/save_tv_series_watchlist.dart';
 import 'package:flutter/foundation.dart';
@@ -14,14 +14,14 @@ class TvSeriesDetailNotifier extends ChangeNotifier {
 
   final GetTvSeriesDetail getTvSeriesDetail;
   final GetTvSeriesRecommendations getTvSeriesRecommendations;
-  final GetMovieWatchListStatus getWatchListStatus;
+  final GetTvSeriesWatchListStatus getTvSeriesWatchListStatus;
   final SaveTvSeriesWatchlist saveTvSeriesWatchlist;
   final RemoveTvSeriesWatchlist removeTvSeriesWatchlist;
 
   TvSeriesDetailNotifier({
     required this.getTvSeriesDetail,
     required this.getTvSeriesRecommendations,
-    required this.getWatchListStatus,
+    required this.getTvSeriesWatchListStatus,
     required this.saveTvSeriesWatchlist,
     required this.removeTvSeriesWatchlist,
   });
@@ -106,7 +106,7 @@ class TvSeriesDetailNotifier extends ChangeNotifier {
   }
 
   Future<void> loadWatchlistStatus(int id) async {
-    final result = await getWatchListStatus.execute(id);
+    final result = await getTvSeriesWatchListStatus.execute(id);
     _isAddedToWatchlist = result;
     notifyListeners();
   }

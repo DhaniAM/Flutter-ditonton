@@ -73,7 +73,7 @@ void init() {
     () => TvSeriesDetailNotifier(
       getTvSeriesDetail: locator(),
       getTvSeriesRecommendations: locator(),
-      getWatchListStatus: locator(),
+      getTvSeriesWatchListStatus: locator(),
       saveTvSeriesWatchlist: locator(),
       removeTvSeriesWatchlist: locator(),
     ),

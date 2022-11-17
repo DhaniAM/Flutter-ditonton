@@ -22,21 +22,30 @@ class TvSeries extends Equatable {
     required this.posterPath,
     required this.overview,
     required this.title,
+    this.popularity,
+    this.voteAverage,
+    this.voteCount,
+    this.genreIds,
+    this.backdropPath,
+    this.firstAirDate,
+    this.originalName,
+    this.originalLanguage,
+    this.originCountry,
   });
 
-  String? posterPath;
-  double? popularity;
-  int id;
-  String? backdropPath;
-  num? voteAverage;
-  String overview;
-  String? firstAirDate;
-  List<dynamic>? originCountry;
-  List<dynamic>? genreIds;
-  String? originalLanguage;
-  int? voteCount;
-  String title;
-  String? originalName;
+  final String? posterPath;
+  final double? popularity;
+  final int id;
+  final String? backdropPath;
+  final num? voteAverage;
+  final String overview;
+  final String? firstAirDate;
+  final List<dynamic>? originCountry;
+  final List<dynamic>? genreIds;
+  final String? originalLanguage;
+  final int? voteCount;
+  final String title;
+  final String? originalName;
 
   @override
   List<Object?> get props => [

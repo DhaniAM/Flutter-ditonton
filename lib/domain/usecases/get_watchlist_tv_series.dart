@@ -6,7 +6,7 @@ import 'package:ditonton/domain/repositories/tv_series_repository.dart';
 class GetWatchlistTvSeries {
   final TvSeriesRepository _repository;
 
-  GetWatchlistTvSeries({required this._repository});
+  GetWatchlistTvSeries(this._repository);
 
   Future<Either<Failure, List<TvSeries>>> execute() {
     return _repository.getWatchlistTvSeries();

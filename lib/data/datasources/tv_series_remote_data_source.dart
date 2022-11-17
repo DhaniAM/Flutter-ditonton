@@ -23,6 +23,7 @@ class TvSeriesRemoteDataSourceImpl extends TvSeriesRemoteDataSource {
 
   TvSeriesRemoteDataSourceImpl({required this.client});
 
+  /// Get raw JSON from API, return model of object
   @override
   Future<List<TvSeriesModel>> getNowPlayingTvSeries() async {
     final response =
@@ -35,6 +36,7 @@ class TvSeriesRemoteDataSourceImpl extends TvSeriesRemoteDataSource {
     }
   }
 
+  /// Get raw JSON from API, return model of object
   @override
   Future<TvSeriesDetailResponse> getTvSeriesDetail(int id) async {
     final response = await client.get(Uri.parse('$BASE_URL/tv/$id?$API_KEY'));
@@ -46,6 +48,7 @@ class TvSeriesRemoteDataSourceImpl extends TvSeriesRemoteDataSource {
     }
   }
 
+  /// Get raw JSON from API, return model of object
   @override
   Future<List<TvSeriesModel>> getTvSeriesRecommendations(int id) async {
     final response = await client
@@ -58,6 +61,7 @@ class TvSeriesRemoteDataSourceImpl extends TvSeriesRemoteDataSource {
     }
   }
 
+  /// Get raw JSON from API, return model of object
   @override
   Future<List<TvSeriesModel>> getPopularTvSeries() async {
     final response =
@@ -70,6 +74,7 @@ class TvSeriesRemoteDataSourceImpl extends TvSeriesRemoteDataSource {
     }
   }
 
+  /// Get raw JSON from API, return model of object
   @override
   Future<List<TvSeriesModel>> getTopRatedTvSeries() async {
     final response =
@@ -82,6 +87,7 @@ class TvSeriesRemoteDataSourceImpl extends TvSeriesRemoteDataSource {
     }
   }
 
+  /// Get raw JSON from API, return model of object
   @override
   Future<List<TvSeriesModel>> searchTvSeries(String query) async {
     final response = await client

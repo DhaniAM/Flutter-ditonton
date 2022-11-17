@@ -32,6 +32,7 @@ class MovieModel extends Equatable {
   final double voteAverage;
   final int voteCount;
 
+  /// Convert JSON/Database to [MovieModel]
   factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
         adult: json["adult"],
         backdropPath: json["backdrop_path"],
@@ -48,6 +49,7 @@ class MovieModel extends Equatable {
         voteCount: json["vote_count"],
       );
 
+  /// Convert from [MovieModel] to JSON or Map<String, dynamic>
   Map<String, dynamic> toJson() => {
         "adult": adult,
         "backdrop_path": backdropPath,
@@ -64,6 +66,7 @@ class MovieModel extends Equatable {
         "vote_count": voteCount,
       };
 
+  /// Convert from [MovieModel] to [Movie]
   Movie toEntity() {
     return Movie(
       adult: this.adult,

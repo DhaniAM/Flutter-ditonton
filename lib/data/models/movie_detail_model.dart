@@ -49,6 +49,7 @@ class MovieDetailResponse extends Equatable {
   final String tagline;
   final bool video;
 
+  /// Convert JSON/Database to [MovieDetailResponse]
   factory MovieDetailResponse.fromJson(Map<String, dynamic> json) =>
       MovieDetailResponse(
         adult: json["adult"],
@@ -75,6 +76,7 @@ class MovieDetailResponse extends Equatable {
         voteCount: json["vote_count"],
       );
 
+  /// Convert [MovieDetailResponse] to JSON/Database
   Map<String, dynamic> toJson() => {
         "adult": adult,
         "backdrop_path": backdropPath,
@@ -99,7 +101,7 @@ class MovieDetailResponse extends Equatable {
         "vote_count": voteCount,
       };
 
-  /// Call [MovieDetail] from domain/entities/movie_detail
+  /// Convert from [MovieDetailResponse]/model to [MovieDetail]
   MovieDetail toEntity() {
     return MovieDetail(
       adult: this.adult,

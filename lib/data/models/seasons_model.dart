@@ -20,6 +20,7 @@ class SeasonsModel extends Equatable {
   final String posterPath;
   final int seasonNumber;
 
+  /// Change to [SeasonsModel] from JSON
   factory SeasonsModel.fromJson(Map<String, dynamic> json) => SeasonsModel(
         airDate: json['air_date'],
         episodeCount: json['episode_count'],
@@ -30,6 +31,7 @@ class SeasonsModel extends Equatable {
         seasonNumber: json['season_number'],
       );
 
+  /// Change to JSON from [SeasonsModel]
   Map<String, dynamic> toJson() => {
         'air_date': airDate,
         'episode_count': episodeCount,
@@ -40,6 +42,7 @@ class SeasonsModel extends Equatable {
         'season_number': seasonNumber,
       };
 
+  /// Change to [Seasons] from [SeasonsModel]
   Seasons toEntity() {
     return Seasons(
         airDate: airDate,

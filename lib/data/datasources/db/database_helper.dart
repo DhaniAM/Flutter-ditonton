@@ -1,9 +1,8 @@
 import 'dart:async';
 
+import 'package:ditonton/data/models/movie_table.dart';
 import 'package:ditonton/data/models/tv_series_table.dart';
 import 'package:sqflite/sqflite.dart';
-
-import '../../models/movie_table.dart';
 
 class DatabaseHelper {
   static DatabaseHelper? _databaseHelper;
@@ -15,6 +14,7 @@ class DatabaseHelper {
 
   static Database? _database;
 
+  /// Init db when db is null
   Future<Database?> get database async {
     if (_database == null) {
       _database = await _initDb();
@@ -22,15 +22,14 @@ class DatabaseHelper {
     return _database;
   }
 
-  static const String _tblWatchlist = 'watchlist';
-
   Future<Database> _initDb() async {
     final path = await getDatabasesPath();
     final databasePath = '$path/ditonton.db';
-
     var db = await openDatabase(databasePath, version: 1, onCreate: _onCreate);
     return db;
   }
+
+  static const String _tblWatchlist = 'watchlist';
 
   void _onCreate(Database db, int version) async {
     await db.execute('''
@@ -72,6 +71,7 @@ class DatabaseHelper {
     );
   }
 
+  /// To check is the movie/tv series is available on database
   Future<Map<String, dynamic>?> getContentById(int id) async {
     final db = await database;
     final results = await db!.query(

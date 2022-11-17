@@ -32,6 +32,7 @@ class TvSeriesModel extends Equatable {
   final String title;
   final String originalName;
 
+  /// Change to [TvSeriesModel] from JSON
   factory TvSeriesModel.fromJson(Map<String, dynamic> json) => TvSeriesModel(
         posterPath: json['poster_path'],
         popularity: json['popularity'],
@@ -48,6 +49,7 @@ class TvSeriesModel extends Equatable {
         originalName: json['original_name'],
       );
 
+  /// Change to JSON from [TvSeriesModel]
   Map<String, dynamic> toJson() => {
         'poster_path': posterPath,
         'popularity': popularity,
@@ -64,6 +66,7 @@ class TvSeriesModel extends Equatable {
         'originalName': originalName,
       };
 
+  /// Change to [TvSeries] from [TvSeriesModel]
   TvSeries toEntity() {
     return TvSeries(
       posterPath: posterPath,

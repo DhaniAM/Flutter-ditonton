@@ -36,6 +36,7 @@ class TvSeriesDetailResponse extends Equatable {
   final num voteAverage;
   final int voteCount;
 
+  /// Change to [TvSeriesDetailResponse]/model from JSON
   factory TvSeriesDetailResponse.fromJson(Map<String, dynamic> json) =>
       TvSeriesDetailResponse(
         backdropPath: json['backdrop_path'],
@@ -56,6 +57,7 @@ class TvSeriesDetailResponse extends Equatable {
         voteCount: json['vote_count'],
       );
 
+  /// Change to JSON from [TvSeriesDetailResponse]/model
   Map<String, dynamic> toJson() => {
         'backdrop_path': backdropPath,
         'first_air_date': firstAirDate,
@@ -73,6 +75,7 @@ class TvSeriesDetailResponse extends Equatable {
         'vote_count': voteCount,
       };
 
+  /// Change to [TvSeriesDetail] from [TvSeriesDetailResponse]/model
   TvSeriesDetail toEntity() {
     return TvSeriesDetail(
       backdropPath: backdropPath,

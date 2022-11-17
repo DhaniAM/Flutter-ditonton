@@ -18,6 +18,12 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
     required this.remoteDataSource,
     required this.localDataSource,
   });
+
+  /// Called by usecase
+  ///
+  /// Call [TvSeriesRemoteDataSource] to get the model,
+  /// then change model to entity, then change to List,
+  /// then return the list of entity/[TvSeries] to usecases
   @override
   Future<Either<Failure, List<TvSeries>>> getNowPlayingTvSeries() async {
     try {
@@ -30,6 +36,7 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
     }
   }
 
+  /// Called by usecase
   @override
   Future<Either<Failure, TvSeriesDetail>> getTvSeriesDetail(int id) async {
     try {
@@ -42,6 +49,7 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
     }
   }
 
+  /// Called by usecase
   @override
   Future<Either<Failure, List<TvSeries>>> getTvSeriesRecommendations(
       int id) async {
@@ -55,6 +63,7 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
     }
   }
 
+  /// Called by usecase
   @override
   Future<Either<Failure, List<TvSeries>>> getPopularTvSeries() async {
     try {
@@ -67,6 +76,7 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
     }
   }
 
+  /// Called by usecase
   @override
   Future<Either<Failure, List<TvSeries>>> getTopRatedTvSeries() async {
     try {
@@ -79,6 +89,7 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
     }
   }
 
+  /// Called by usecase
   @override
   Future<Either<Failure, List<TvSeries>>> searchTvSeries(String query) async {
     try {
@@ -91,6 +102,7 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
     }
   }
 
+  /// Called by usecase
   @override
   Future<Either<Failure, String>> saveTvSeriesWatchlist(
       TvSeriesDetail tvSeries) async {
@@ -103,6 +115,7 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
     }
   }
 
+  /// Called by usecase
   @override
   Future<Either<Failure, String>> removeTvSeriesWatchlist(
       TvSeriesDetail tvSeries) async {
@@ -115,12 +128,14 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
     }
   }
 
+  /// Called by usecase
   @override
   Future<bool> isTvSeriesAddedToWatchlist(int id) async {
     final result = await localDataSource.getTvSeriesId(id);
     return result != null;
   }
 
+  /// Called by usecase
   @override
   Future<Either<Failure, List<TvSeries>>> getWatchlistTvSeries() async {
     final result = await localDataSource.getWatchlist();

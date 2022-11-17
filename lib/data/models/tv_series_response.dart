@@ -6,6 +6,7 @@ class TvSeriesResponse extends Equatable {
 
   TvSeriesResponse({required this.tvSeriesList});
 
+  /// Convert JSON from API to [TvSeriesResponse] (List of [TvSeriesModel])
   factory TvSeriesResponse.fromJson(Map<String, dynamic> json) =>
       TvSeriesResponse(
         tvSeriesList: List<TvSeriesModel>.from((json['results'] as List)

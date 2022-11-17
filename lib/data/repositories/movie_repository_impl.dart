@@ -19,6 +19,11 @@ class MovieRepositoryImpl implements MovieRepository {
     required this.localDataSource,
   });
 
+  /// Called by usecase
+  ///
+  /// Call [MovieRemoteDataSource] to get the model,
+  /// then change model to entity, then change to List,
+  /// then return the list of entity/[Movie] to usecases
   @override
   Future<Either<Failure, List<Movie>>> getNowPlayingMovies() async {
     try {
@@ -31,8 +36,7 @@ class MovieRepositoryImpl implements MovieRepository {
     }
   }
 
-  /// Call [MovieRemoteDataSource] from data/datasources/movie_remote_data_source
-  /// To get the model, then change model to entity, return the entity to usecases
+  /// Called by usecase
   @override
   Future<Either<Failure, MovieDetail>> getMovieDetail(int id) async {
     try {
@@ -46,6 +50,7 @@ class MovieRepositoryImpl implements MovieRepository {
     }
   }
 
+  /// Called by usecase
   @override
   Future<Either<Failure, List<Movie>>> getMovieRecommendations(int id) async {
     try {
@@ -58,6 +63,7 @@ class MovieRepositoryImpl implements MovieRepository {
     }
   }
 
+  /// Called by usecase
   @override
   Future<Either<Failure, List<Movie>>> getPopularMovies() async {
     try {
@@ -70,6 +76,7 @@ class MovieRepositoryImpl implements MovieRepository {
     }
   }
 
+  /// Called by usecase
   @override
   Future<Either<Failure, List<Movie>>> getTopRatedMovies() async {
     try {
@@ -82,6 +89,7 @@ class MovieRepositoryImpl implements MovieRepository {
     }
   }
 
+  /// Called by usecase
   @override
   Future<Either<Failure, List<Movie>>> searchMovies(String query) async {
     try {
@@ -94,6 +102,7 @@ class MovieRepositoryImpl implements MovieRepository {
     }
   }
 
+  /// Called by usecase
   @override
   Future<Either<Failure, String>> saveMoviesWatchlist(MovieDetail movie) async {
     try {
@@ -107,6 +116,7 @@ class MovieRepositoryImpl implements MovieRepository {
     }
   }
 
+  /// Called by usecase
   @override
   Future<Either<Failure, String>> removeMoviesWatchlist(
       MovieDetail movie) async {
@@ -119,12 +129,14 @@ class MovieRepositoryImpl implements MovieRepository {
     }
   }
 
+  /// Called by usecase
   @override
   Future<bool> isMoviesAddedToWatchlist(int id) async {
     final result = await localDataSource.getMovieById(id);
     return result != null;
   }
 
+  /// Called by usecase
   @override
   Future<Either<Failure, List<Movie>>> getWatchlistMovies() async {
     final List<MovieTable> result = await localDataSource.getWatchlist();

@@ -2,6 +2,7 @@ import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:equatable/equatable.dart';
 
+/// Data to save on Database
 class MovieTable extends Equatable {
   final int id;
   final String? title;
@@ -17,7 +18,7 @@ class MovieTable extends Equatable {
     required this.type,
   });
 
-  /// Change from MovieDetail to MovieTable, to get saved on Database
+  /// Change from [MovieDetail] to [MovieTable], to get saved on Database
   factory MovieTable.fromEntity(MovieDetail movie) => MovieTable(
         id: movie.id,
         title: movie.title,
@@ -26,7 +27,7 @@ class MovieTable extends Equatable {
         type: 'movie',
       );
 
-  /// from Database (JSON)
+  /// Change to [MovieTable] from JSON/Database
   factory MovieTable.fromJson(Map<String, dynamic> map) => MovieTable(
         id: map['id'],
         title: map['title'],
@@ -35,6 +36,7 @@ class MovieTable extends Equatable {
         type: map['type'],
       );
 
+  /// Change to JSON/Database format from [MovieTable]
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
@@ -43,6 +45,7 @@ class MovieTable extends Equatable {
         'type': 'movie',
       };
 
+  /// Change to [Movie] from [MovieTable]
   Movie toEntity() => Movie.watchlist(
         id: id,
         overview: overview,

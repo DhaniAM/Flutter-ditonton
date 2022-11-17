@@ -38,7 +38,7 @@ class DatabaseHelper {
         id INTEGER PRIMARY KEY,
         title TEXT,
         overview TEXT,
-        posterPath TEXT
+        posterPath TEXT,
       );
     ''');
   }
@@ -88,6 +88,7 @@ class DatabaseHelper {
 
   Future<List<Map<String, dynamic>>> getWatchlist() async {
     final db = await database;
+    // Map<String,dynamic> is equal to JSON
     final List<Map<String, dynamic>> results = await db!.query(_tblWatchlist);
 
     return results;

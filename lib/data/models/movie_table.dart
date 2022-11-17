@@ -15,6 +15,7 @@ class MovieTable extends Equatable {
     required this.overview,
   });
 
+  /// Change from MovieDetail to MovieTable, to get saved on Database
   factory MovieTable.fromEntity(MovieDetail movie) => MovieTable(
         id: movie.id,
         title: movie.title,
@@ -22,7 +23,8 @@ class MovieTable extends Equatable {
         overview: movie.overview,
       );
 
-  factory MovieTable.fromMap(Map<String, dynamic> map) => MovieTable(
+  /// from Database (JSON)
+  factory MovieTable.fromJson(Map<String, dynamic> map) => MovieTable(
         id: map['id'],
         title: map['title'],
         posterPath: map['posterPath'],

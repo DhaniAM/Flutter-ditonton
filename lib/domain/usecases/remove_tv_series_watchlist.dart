@@ -8,6 +8,7 @@ class RemoveTvSeriesWatchlist {
 
   RemoveTvSeriesWatchlist(this.repository);
 
+  /// Call [TvSeriesRepository].removeTvSeriesWatchlist(tvSeries)
   Future<Either<Failure, String>> execute(TvSeriesDetail tvSeries) {
     return repository.removeTvSeriesWatchlist(tvSeries);
   }

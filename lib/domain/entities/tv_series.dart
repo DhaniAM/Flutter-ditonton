@@ -17,6 +17,7 @@ class TvSeries extends Equatable {
     required this.originalName,
   });
 
+  /// To database model, not to JSON
   TvSeries.watchlist({
     required this.id,
     required this.posterPath,

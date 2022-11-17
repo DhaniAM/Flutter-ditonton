@@ -17,6 +17,7 @@ class Movie extends Equatable {
     required this.voteCount,
   });
 
+  /// To database model, not to JSON
   Movie.watchlist({
     required this.id,
     required this.overview,

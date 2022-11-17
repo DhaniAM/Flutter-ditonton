@@ -8,6 +8,7 @@ class SaveTvSeriesWatchlist {
 
   SaveTvSeriesWatchlist(this.repository);
 
+  /// Call [TvSeriesRepository].saveTvSeriesWatchlist(tvSeries)
   Future<Either<Failure, String>> execute(TvSeriesDetail tvSeries) {
     return repository.saveTvSeriesWatchlist(tvSeries);
   }

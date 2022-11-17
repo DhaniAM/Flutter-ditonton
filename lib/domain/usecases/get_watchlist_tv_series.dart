@@ -8,6 +8,7 @@ class GetWatchlistTvSeries {
 
   GetWatchlistTvSeries(this._repository);
 
+  /// Call [TvSeriesRepository].getWatchlistTvSeries
   Future<Either<Failure, List<TvSeries>>> execute() {
     return _repository.getWatchlistTvSeries();
   }

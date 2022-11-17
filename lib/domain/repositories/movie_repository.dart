@@ -4,8 +4,9 @@ import 'package:ditonton/data/repositories/movie_repository_impl.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 
+/// Interface
+/// Implementation on [MovieRepositoryImpl]
 abstract class MovieRepository {
-  /// Call [MovieRepositoryImpl] from data/repositories/movie_repository_impl
   Future<Either<Failure, List<Movie>>> getNowPlayingMovies();
   Future<Either<Failure, List<Movie>>> getPopularMovies();
   Future<Either<Failure, List<Movie>>> getTopRatedMovies();

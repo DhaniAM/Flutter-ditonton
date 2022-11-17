@@ -8,6 +8,7 @@ class SearchTvSeries {
 
   SearchTvSeries(this.repository);
 
+  /// Call [TvSeriesRepository].searchTvSeries(query)
   Future<Either<Failure, List<TvSeries>>> execute(String query) {
     return repository.searchTvSeries(query);
   }

@@ -8,6 +8,7 @@ class GetTvSeriesRecommendations {
 
   GetTvSeriesRecommendations(this.repository);
 
+  /// Call [TvSeriesRepository].getTvSeriesRecommendation(id)
   Future<Either<Failure, List<TvSeries>>> execute(id) {
     return repository.getTvSeriesRecommendations(id);
   }

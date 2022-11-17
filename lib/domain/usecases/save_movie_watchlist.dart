@@ -9,6 +9,6 @@ class SaveMovieWatchlist {
   SaveMovieWatchlist(this.repository);
 
   Future<Either<Failure, String>> execute(MovieDetail movie) {
-    return repository.saveWatchlist(movie);
+    return repository.saveMoviesWatchlist(movie);
   }
 }

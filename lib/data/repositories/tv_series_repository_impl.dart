@@ -92,7 +92,8 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
   }
 
   @override
-  Future<Either<Failure, String>> saveWatchlist(TvSeriesDetail tvSeries) async {
+  Future<Either<Failure, String>> saveTvSeriesWatchlist(
+      TvSeriesDetail tvSeries) async {
     try {
       final result = await localDataSource
           .insertWatchList(TvSeriesTable.fromEntity(tvSeries));
@@ -103,7 +104,7 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
   }
 
   @override
-  Future<Either<Failure, String>> removeWatchlist(
+  Future<Either<Failure, String>> removeTvSeriesWatchlist(
       TvSeriesDetail tvSeries) async {
     try {
       final result = await localDataSource
@@ -115,7 +116,7 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
   }
 
   @override
-  Future<bool> isAddedToWatchlist(int id) async {
+  Future<bool> isTvSeriesAddedToWatchlist(int id) async {
     final result = await localDataSource.getTvSeriesId(id);
     return result != null;
   }

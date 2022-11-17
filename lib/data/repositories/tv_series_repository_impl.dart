@@ -122,7 +122,7 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
 
   @override
   Future<Either<Failure, List<TvSeries>>> getWatchlistTvSeries() async {
-    final result = await localDataSource.getWatchListTvSeries();
+    final result = await localDataSource.getWatchlist();
     return Right(result.map((data) => data.toEntity()).toList());
   }
 }

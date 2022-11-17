@@ -9,25 +9,30 @@ class TvSeriesTable extends Equatable {
     required this.title,
     required this.posterPath,
     required this.overview,
+    required this.type,
   });
 
   final int id;
   final String title;
   final String? posterPath;
   final String overview;
+  final String type;
 
   factory TvSeriesTable.fromEntity(TvSeriesDetail tvSeries) => TvSeriesTable(
         id: tvSeries.id,
         title: tvSeries.title,
         posterPath: tvSeries.posterPath,
         overview: tvSeries.overview,
+        type: 'tvSeries',
       );
 
-  factory TvSeriesTable.fromMap(Map<String, dynamic> map) => TvSeriesTable(
+  /// from Database
+  factory TvSeriesTable.fromJson(Map<String, dynamic> map) => TvSeriesTable(
         id: map['id'],
         title: map['title'],
         posterPath: map['posterPath'],
         overview: map['overview'],
+        type: map['type'],
       );
 
   Map<String, dynamic> toJson() => {

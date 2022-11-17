@@ -93,7 +93,7 @@ void main() {
       when(mockDatabaseHelper.getWatchlist())
           .thenAnswer((_) async => [testMovieMap]);
       // act
-      final result = await dataSource.getWatchlistMovies();
+      final result = await dataSource.getWatchlist();
       // assert
       expect(result, [testMovieTable]);
     });

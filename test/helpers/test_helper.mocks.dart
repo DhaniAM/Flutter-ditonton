@@ -181,7 +181,7 @@ class MockMovieLocalDataSource extends _i1.Mock
               returnValue: Future<_i14.MovieTable?>.value())
           as _i7.Future<_i14.MovieTable?>);
   @override
-  _i7.Future<List<_i14.MovieTable>> getWatchlistMovies() => (super.noSuchMethod(
+  _i7.Future<List<_i14.MovieTable>> getWatchlist() => (super.noSuchMethod(
           Invocation.method(#getWatchlistMovies, []),
           returnValue: Future<List<_i14.MovieTable>>.value(<_i14.MovieTable>[]))
       as _i7.Future<List<_i14.MovieTable>>);

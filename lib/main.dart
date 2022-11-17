@@ -18,6 +18,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'presentation/provider/popular_tv_series_notifier.dart';
+import 'presentation/provider/top_rated_tv_series_notifier.dart';
+import 'presentation/provider/tv_series_detail_notifier.dart';
+import 'presentation/provider/tv_series_list_notifier.dart';
+import 'presentation/provider/tv_series_search_notifier.dart';
+import 'presentation/provider/watchlist_tv_series_notifier.dart';
+
 void main() {
   di.init();
   runApp(MyApp());
@@ -32,19 +39,37 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<MovieListNotifier>(),
         ),
         ChangeNotifierProvider(
+          create: (_) => di.locator<TvSeriesListNotifier>(),
+        ),
+        ChangeNotifierProvider(
           create: (_) => di.locator<MovieDetailNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TvSeriesDetailNotifier>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<MovieSearchNotifier>(),
         ),
         ChangeNotifierProvider(
+          create: (_) => di.locator<TvSeriesSearchNotifier>(),
+        ),
+        ChangeNotifierProvider(
           create: (_) => di.locator<TopRatedMoviesNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TopRatedTvSeriesNotifier>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<PopularMoviesNotifier>(),
         ),
         ChangeNotifierProvider(
+          create: (_) => di.locator<PopularTvSeriesNotifier>(),
+        ),
+        ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistMovieNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<WatchlistTvSeriesNotifier>(),
         ),
       ],
       child: MaterialApp(

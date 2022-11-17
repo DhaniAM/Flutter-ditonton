@@ -22,11 +22,11 @@ class TvSeriesModel extends Equatable {
   final double popularity;
   final int id;
   final String? backdropPath;
-  final int voteAverage;
+  final num voteAverage;
   final String overview;
   final String firstAirDate;
-  final List<String> originCountry;
-  final List<int> genreIds;
+  final List<dynamic> originCountry;
+  final List<dynamic> genreIds;
   final String originalLanguage;
   final int voteCount;
   final String title;

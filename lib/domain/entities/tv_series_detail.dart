@@ -32,7 +32,7 @@ class TvSeriesDetail extends Equatable {
   final String? posterPath;
   final List<Seasons> seasons;
   final String tagline;
-  final double voteAverage;
+  final num voteAverage;
   final int voteCount;
 
   @override

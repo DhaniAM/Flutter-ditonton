@@ -33,7 +33,7 @@ class TvSeriesDetailResponse extends Equatable {
   final String? posterPath;
   final List<SeasonsModel> seasons;
   final String tagline;
-  final double voteAverage;
+  final num voteAverage;
   final int voteCount;
 
   factory TvSeriesDetailResponse.fromJson(Map<String, dynamic> json) =>

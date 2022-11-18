@@ -29,6 +29,7 @@ class ContentCardList extends StatelessWidget {
           children: [
             Card(
               child: Container(
+                width: double.infinity,
                 margin: const EdgeInsets.only(
                   left: 16 + 80 + 16,
                   bottom: 8,
@@ -45,7 +46,7 @@ class ContentCardList extends StatelessWidget {
                     ),
                     SizedBox(height: 16),
                     Text(
-                      content.overview ?? '-',
+                      (content.overview != '') ? content.overview : '-',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),

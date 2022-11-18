@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/genre.dart';
+import 'package:ditonton/domain/entities/seasons.dart';
 import 'package:ditonton/domain/entities/tv_series.dart';
 import 'package:ditonton/domain/entities/tv_series_detail.dart';
 import 'package:ditonton/presentation/provider/tv_series_detail_notifier.dart';
@@ -172,6 +173,62 @@ class DetailContent extends StatelessWidget {
                                 ),
                                 Text('${tvSeries.voteAverage}')
                               ],
+                            ),
+                            SizedBox(height: 16),
+                            Text(
+                              'Seasons',
+                              style: kHeading6,
+                            ),
+                            Text(
+                              'Number of seasons: ${tvSeries.numberOfSeasons.toString()}',
+                            ),
+                            Container(
+                              height: 250,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (_, index) {
+                                  Seasons seasons = tvSeries.seasons[index];
+                                  return SizedBox(
+                                    width: 150,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(8),
+                                              ),
+                                              child: CachedNetworkImage(
+                                                imageUrl: (seasons.posterPath !=
+                                                        null)
+                                                    ? 'https://image.tmdb.org/t/p/w500${seasons.posterPath}'
+                                                    : 'https://image.tmdb.org/t/p/w500${tvSeries.posterPath}',
+                                                placeholder: (_, url) => Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                ),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Icon(Icons.error),
+                                              ),
+                                            ),
+                                          ),
+                                          Text(
+                                            seasons.title ?? '',
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          Text(
+                                              '${seasons.episodeCount.toString()} episodes'),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                                itemCount: tvSeries.seasons.length,
+                              ),
                             ),
                             SizedBox(height: 16),
                             Text(

@@ -1,25 +1,16 @@
 import 'package:ditonton/common/constants.dart';
+import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/home_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
+import 'package:ditonton/presentation/provider/bottom_navigation_bar_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage();
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _currentPage = 0;
-
-  static const List<Widget> page = const <Widget>[
-    HomeMoviePage(),
-    HomeTvSeriesPage(),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -69,26 +60,42 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.movie),
-            label: 'Movies',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.library_books_sharp),
-            label: 'Tv Series',
-          ),
-        ],
-        selectedItemColor: kMikadoYellow,
-        currentIndex: _currentPage,
-        onTap: (value) {
-          setState(() {
-            _currentPage = value;
-          });
+      bottomNavigationBar: Consumer<BottomNavigationBarNotifier>(
+        builder: (context, data, _) {
+          return BottomNavigationBar(
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.movie),
+                label: 'Movies',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.library_books_sharp),
+                label: 'Tv Series',
+              ),
+            ],
+            selectedItemColor: kMikadoYellow,
+            currentIndex: data.index,
+            onTap: (value) => data.changeIndex(value),
+          );
         },
       ),
-      body: page.elementAt(_currentPage),
+      body: Consumer<BottomNavigationBarNotifier>(
+        builder: (context, value, child) {
+          final int index = value.index;
+          final reqState = value.requestState;
+          if (reqState == RequestState.Loading) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            if (index == 0) {
+              return HomeMoviePage();
+            } else {
+              return HomeTvSeriesPage();
+            }
+          }
+        },
+      ),
     );
   }
 }

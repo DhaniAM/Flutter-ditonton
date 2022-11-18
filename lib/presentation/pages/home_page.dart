@@ -4,7 +4,7 @@ import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/home_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
-import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
+import 'package:ditonton/presentation/pages/watchlist_page.dart';
 import 'package:ditonton/presentation/provider/bottom_navigation_bar_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
               leading: Icon(Icons.save_alt),
               title: Text('Watchlist'),
               onTap: () {
-                Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
+                Navigator.pushNamed(context, WatchlistPage.ROUTE_NAME);
               },
             ),
             ListTile(
@@ -59,6 +59,26 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      body: Consumer<BottomNavigationBarNotifier>(
+        builder: (context, value, child) {
+          final RequestState state = value.requestState;
+          if (state == RequestState.Loading) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state == RequestState.Loaded) {
+            if (value.index == 0) {
+              return HomeMoviePage();
+            } else {
+              return HomeTvSeriesPage();
+            }
+          } else {
+            return Center(
+              child: Text('Failed'),
+            );
+          }
+        },
       ),
       bottomNavigationBar: Consumer<BottomNavigationBarNotifier>(
         builder: (context, data, _) {
@@ -77,23 +97,6 @@ class HomePage extends StatelessWidget {
             currentIndex: data.index,
             onTap: (value) => data.changeIndex(value),
           );
-        },
-      ),
-      body: Consumer<BottomNavigationBarNotifier>(
-        builder: (context, value, child) {
-          final int index = value.index;
-          final reqState = value.requestState;
-          if (reqState == RequestState.Loading) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            if (index == 0) {
-              return HomeMoviePage();
-            } else {
-              return HomeTvSeriesPage();
-            }
-          }
         },
       ),
     );

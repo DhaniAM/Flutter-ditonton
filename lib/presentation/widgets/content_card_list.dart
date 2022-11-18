@@ -44,6 +44,7 @@ class ContentCardList extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: kHeading6,
                     ),
+                    Text('- ${(content is Movie) ? 'Movie' : 'Tv Series'} -'),
                     SizedBox(height: 16),
                     Text(
                       (content.overview != '') ? content.overview : '-',

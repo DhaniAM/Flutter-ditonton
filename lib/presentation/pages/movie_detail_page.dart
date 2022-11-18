@@ -51,7 +51,9 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               ),
             );
           } else {
-            return Text(provider.message);
+            return Center(
+              child: Text(provider.message),
+            );
           }
         },
       ),

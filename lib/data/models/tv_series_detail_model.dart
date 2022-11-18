@@ -33,7 +33,7 @@ class TvSeriesDetailResponse extends Equatable {
   final String? posterPath;
   final List<SeasonsModel> seasons;
   final String tagline;
-  final num voteAverage;
+  final double voteAverage;
   final int voteCount;
 
   /// Change to [TvSeriesDetailResponse]/model from JSON
@@ -53,7 +53,7 @@ class TvSeriesDetailResponse extends Equatable {
         seasons: List<SeasonsModel>.from(
             json['seasons'].map((x) => SeasonsModel.fromJson(x))),
         tagline: json['tagline'],
-        voteAverage: json['vote_average'],
+        voteAverage: double.parse(json['vote_average'].toStringAsFixed(2)),
         voteCount: json['vote_count'],
       );
 

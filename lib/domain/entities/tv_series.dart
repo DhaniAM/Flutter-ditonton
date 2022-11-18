@@ -38,7 +38,7 @@ class TvSeries extends Equatable {
   final double? popularity;
   final int id;
   final String? backdropPath;
-  final num? voteAverage;
+  final double? voteAverage;
   final String overview;
   final String? firstAirDate;
   final List<dynamic>? originCountry;

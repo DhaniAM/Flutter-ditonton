@@ -22,7 +22,7 @@ class TvSeriesModel extends Equatable {
   final double popularity;
   final int id;
   final String? backdropPath;
-  final num voteAverage;
+  final double voteAverage;
   final String overview;
   final String firstAirDate;
   final List<dynamic> originCountry;
@@ -38,7 +38,7 @@ class TvSeriesModel extends Equatable {
         popularity: json['popularity'],
         id: json['id'],
         backdropPath: json['backdrop_path'],
-        voteAverage: json['vote_average'],
+        voteAverage: double.parse(json['vote_average'].toStringAsFixed(2)),
         overview: json['overview'],
         firstAirDate: json['first_air_date'],
         originCountry: json['origin_country'],

@@ -72,7 +72,7 @@ class MovieDetailResponse extends Equatable {
         tagline: json["tagline"],
         title: json["title"],
         video: json["video"],
-        voteAverage: json["vote_average"].toDouble(),
+        voteAverage: double.parse(json["vote_average"].toStringAsFixed(2)),
         voteCount: json["vote_count"],
       );
 

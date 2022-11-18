@@ -1,5 +1,7 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/domain/entities/tv_series.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_series_search_notifier.dart';
 import 'package:ditonton/presentation/widgets/search_result_list.dart';
@@ -46,26 +48,16 @@ class SearchPage extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   );
                 } else if (movieData.state == RequestState.Loaded) {
-                  final movieResult = movieData.searchResult;
-                  final tvSeriesResult = tvSeriesData.searchResult;
-                  final int movieLength = movieResult.length;
-                  final int tvSeriesLength = tvSeriesResult.length;
-                  final int contentLength = (movieLength == tvSeriesLength)
-                      ? movieLength
-                      : (movieLength < tvSeriesLength)
-                          ? movieLength
-                          : tvSeriesLength;
+                  List results = mergeResults(
+                      movieData.searchResult, tvSeriesData.searchResult);
 
                   return Expanded(
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),
                       itemBuilder: (context, index) {
-                        final movie = movieData.searchResult[index];
-                        final tvSeries = tvSeriesData.searchResult[index];
-                        final List result = [movie, tvSeries];
-                        return SearchResultList(result);
+                        return SearchResultList(results[index]);
                       },
-                      itemCount: contentLength,
+                      itemCount: results.length,
                     ),
                   );
                 } else {
@@ -79,5 +71,23 @@ class SearchPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  List mergeResults(List<Movie> movie, List<TvSeries> tvSeries) {
+    List<dynamic> results = [];
+    int tvSeriesLength = tvSeries.length;
+    int movieLength = movie.length;
+    int longest = (tvSeriesLength > movieLength) ? tvSeriesLength : movieLength;
+
+    for (int i = 0; i < longest; i++) {
+      if (i < tvSeriesLength) {
+        results.add(tvSeries[i]);
+      }
+      if (i < movieLength) {
+        results.add(movie[i]);
+      }
+    }
+
+    return results;
   }
 }

@@ -15,6 +15,7 @@ class TvSeries extends Equatable {
     required this.voteCount,
     required this.title,
     required this.originalName,
+    required this.type,
   });
 
   /// To database model, not to JSON
@@ -23,6 +24,7 @@ class TvSeries extends Equatable {
     required this.posterPath,
     required this.overview,
     required this.title,
+    required this.type,
     this.popularity,
     this.voteAverage,
     this.voteCount,
@@ -47,6 +49,7 @@ class TvSeries extends Equatable {
   final int? voteCount;
   final String title;
   final String? originalName;
+  final String type;
 
   @override
   List<Object?> get props => [
@@ -62,6 +65,7 @@ class TvSeries extends Equatable {
         originalLanguage,
         voteCount,
         title,
-        originalName
+        originalName,
+        type,
       ];
 }

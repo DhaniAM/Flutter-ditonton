@@ -32,7 +32,7 @@ class TvSeriesTable extends Equatable {
         title: map['title'],
         posterPath: map['posterPath'],
         overview: map['overview'],
-        type: map['type'],
+        type: 'tvSeries',
       );
 
   Map<String, dynamic> toJson() => {
@@ -44,11 +44,11 @@ class TvSeriesTable extends Equatable {
       };
 
   TvSeries toEntity() => TvSeries.watchlist(
-        id: id,
-        posterPath: posterPath,
-        overview: overview,
-        title: title,
-      );
+      id: id,
+      posterPath: posterPath,
+      overview: overview,
+      title: title,
+      type: 'tvSeries');
 
   @override
   List<Object?> get props => [
@@ -56,5 +56,6 @@ class TvSeriesTable extends Equatable {
         title,
         posterPath,
         overview,
+        type,
       ];
 }

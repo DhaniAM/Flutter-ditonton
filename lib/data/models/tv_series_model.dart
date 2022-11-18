@@ -16,6 +16,7 @@ class TvSeriesModel extends Equatable {
     required this.voteCount,
     required this.title,
     required this.originalName,
+    required this.type,
   });
 
   final String? posterPath;
@@ -31,6 +32,7 @@ class TvSeriesModel extends Equatable {
   final int voteCount;
   final String title;
   final String originalName;
+  final String type;
 
   /// Change to [TvSeriesModel] from JSON
   factory TvSeriesModel.fromJson(Map<String, dynamic> json) => TvSeriesModel(
@@ -47,6 +49,7 @@ class TvSeriesModel extends Equatable {
         voteCount: json['vote_count'],
         title: json['name'],
         originalName: json['original_name'],
+        type: 'tvSeries',
       );
 
   /// Change to JSON from [TvSeriesModel]
@@ -64,6 +67,7 @@ class TvSeriesModel extends Equatable {
         'vote_count': voteCount,
         'title': title,
         'originalName': originalName,
+        'type': 'tvSeries'
       };
 
   /// Change to [TvSeries] from [TvSeriesModel]
@@ -82,6 +86,7 @@ class TvSeriesModel extends Equatable {
       voteCount: voteCount,
       title: title,
       originalName: originalName,
+      type: 'tvSeries',
     );
   }
 
@@ -99,6 +104,7 @@ class TvSeriesModel extends Equatable {
         originalLanguage,
         voteCount,
         title,
-        originalName
+        originalName,
+        type,
       ];
 }

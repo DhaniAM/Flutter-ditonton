@@ -55,6 +55,7 @@ class SearchPage extends StatelessWidget {
                       : (movieLength < tvSeriesLength)
                           ? movieLength
                           : tvSeriesLength;
+
                   return Expanded(
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),

@@ -87,11 +87,19 @@ class DatabaseHelper {
     }
   }
 
-  Future<List<Map<String, dynamic>>> getWatchlist() async {
+  Future<List<Map<String, dynamic>>> getMovieWatchlist() async {
     final db = await database;
-    // Map<String,dynamic> is equal to JSON
-    final List<Map<String, dynamic>> results = await db!.query(_tblWatchlist);
+    final List<Map<String, dynamic>> movie =
+        await db!.query(_tblWatchlist, where: 'type = ?', whereArgs: ['movie']);
 
-    return results;
+    return movie;
+  }
+
+  Future<List<Map<String, dynamic>>> getTvSeriesWatchlist() async {
+    final db = await database;
+    final List<Map<String, dynamic>> tvSeries = await db!
+        .query(_tblWatchlist, where: 'type = ?', whereArgs: ['tvSeries']);
+
+    return tvSeries;
   }
 }

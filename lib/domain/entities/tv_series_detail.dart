@@ -18,6 +18,7 @@ class TvSeriesDetail extends Equatable {
     required this.tagline,
     required this.voteAverage,
     required this.voteCount,
+    required this.type,
   });
 
   final String? backdropPath;
@@ -34,6 +35,7 @@ class TvSeriesDetail extends Equatable {
   final String tagline;
   final double voteAverage;
   final int voteCount;
+  final String type;
 
   @override
   List<Object?> get props => [
@@ -50,6 +52,7 @@ class TvSeriesDetail extends Equatable {
         seasons,
         tagline,
         voteAverage,
-        voteCount
+        voteCount,
+        type,
       ];
 }

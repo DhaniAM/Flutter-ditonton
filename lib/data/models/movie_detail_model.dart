@@ -25,6 +25,7 @@ class MovieDetailResponse extends Equatable {
     required this.status,
     required this.tagline,
     required this.video,
+    required this.type,
   });
 
   final bool adult;
@@ -48,6 +49,7 @@ class MovieDetailResponse extends Equatable {
   final String status;
   final String tagline;
   final bool video;
+  final String type;
 
   /// Convert JSON/Database to [MovieDetailResponse]
   factory MovieDetailResponse.fromJson(Map<String, dynamic> json) =>
@@ -74,6 +76,7 @@ class MovieDetailResponse extends Equatable {
         video: json["video"],
         voteAverage: double.parse(json["vote_average"].toStringAsFixed(2)),
         voteCount: json["vote_count"],
+        type: 'movie',
       );
 
   /// Convert [MovieDetailResponse] to JSON/Database
@@ -99,6 +102,7 @@ class MovieDetailResponse extends Equatable {
         "video": video,
         "vote_average": voteAverage,
         "vote_count": voteCount,
+        "type": "movie",
       };
 
   /// Convert from [MovieDetailResponse]/model to [MovieDetail]
@@ -116,6 +120,7 @@ class MovieDetailResponse extends Equatable {
       title: this.title,
       voteAverage: this.voteAverage,
       voteCount: this.voteCount,
+      type: 'movie',
     );
   }
 
@@ -143,5 +148,6 @@ class MovieDetailResponse extends Equatable {
         video,
         voteAverage,
         voteCount,
+        type,
       ];
 }

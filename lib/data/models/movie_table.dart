@@ -33,7 +33,7 @@ class MovieTable extends Equatable {
         title: map['title'],
         posterPath: map['posterPath'],
         overview: map['overview'],
-        type: map['type'],
+        type: 'movie',
       );
 
   /// Change to JSON/Database format from [MovieTable]
@@ -51,6 +51,7 @@ class MovieTable extends Equatable {
         overview: overview,
         posterPath: posterPath,
         title: title,
+        type: 'movie',
       );
 
   @override

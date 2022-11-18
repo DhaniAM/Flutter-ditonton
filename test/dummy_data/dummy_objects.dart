@@ -20,6 +20,7 @@ final testMovie = Movie(
   video: false,
   voteAverage: 7.2,
   voteCount: 13507,
+  type: 'movie',
 );
 
 final testMovieList = [testMovie];
@@ -37,6 +38,7 @@ final testMovieDetail = MovieDetail(
   title: 'title',
   voteAverage: 1,
   voteCount: 1,
+  type: 'movie',
 );
 
 final testTvSeriesDetail = TvSeriesDetail(
@@ -63,6 +65,7 @@ final testTvSeriesDetail = TvSeriesDetail(
   ],
   tagline: 'tagline',
   title: 'title',
+  type: 'tvSeries',
 );
 
 final testWatchlistMovie = Movie.watchlist(
@@ -70,6 +73,7 @@ final testWatchlistMovie = Movie.watchlist(
   title: 'title',
   posterPath: 'posterPath',
   overview: 'overview',
+  type: 'movie',
 );
 
 final testMovieTable = MovieTable(

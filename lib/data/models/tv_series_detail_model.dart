@@ -19,6 +19,7 @@ class TvSeriesDetailResponse extends Equatable {
     required this.tagline,
     required this.voteAverage,
     required this.voteCount,
+    required this.type,
   });
 
   final String? backdropPath;
@@ -35,6 +36,7 @@ class TvSeriesDetailResponse extends Equatable {
   final String tagline;
   final double voteAverage;
   final int voteCount;
+  final String type;
 
   /// Change to [TvSeriesDetailResponse]/model from JSON
   factory TvSeriesDetailResponse.fromJson(Map<String, dynamic> json) =>
@@ -55,6 +57,7 @@ class TvSeriesDetailResponse extends Equatable {
         tagline: json['tagline'],
         voteAverage: double.parse(json['vote_average'].toStringAsFixed(2)),
         voteCount: json['vote_count'],
+        type: 'tvSeries',
       );
 
   /// Change to JSON from [TvSeriesDetailResponse]/model
@@ -73,6 +76,7 @@ class TvSeriesDetailResponse extends Equatable {
         'tagline': tagline,
         'vote_average': voteAverage,
         'vote_count': voteCount,
+        'type': 'tvSeries',
       };
 
   /// Change to [TvSeriesDetail] from [TvSeriesDetailResponse]/model
@@ -92,6 +96,7 @@ class TvSeriesDetailResponse extends Equatable {
       tagline: tagline,
       voteAverage: voteAverage,
       voteCount: voteCount,
+      type: 'tvSeries',
     );
   }
 
@@ -111,5 +116,6 @@ class TvSeriesDetailResponse extends Equatable {
         tagline,
         voteAverage,
         voteCount,
+        type,
       ];
 }

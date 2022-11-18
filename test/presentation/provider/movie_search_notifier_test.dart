@@ -40,6 +40,7 @@ void main() {
     video: false,
     voteAverage: 7.2,
     voteCount: 13507,
+    type: 'movie',
   );
   final tMovieList = <Movie>[tMovieModel];
   final tQuery = 'spiderman';

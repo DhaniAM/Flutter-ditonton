@@ -15,6 +15,7 @@ class Movie extends Equatable {
     required this.video,
     required this.voteAverage,
     required this.voteCount,
+    required this.type,
   });
 
   /// To database model, not to JSON
@@ -23,6 +24,7 @@ class Movie extends Equatable {
     required this.overview,
     required this.posterPath,
     required this.title,
+    required this.type,
     this.adult,
     this.backdropPath,
     this.genreIds,
@@ -47,6 +49,7 @@ class Movie extends Equatable {
   final bool? video;
   final double? voteAverage;
   final int? voteCount;
+  final String type;
 
   @override
   List<Object?> get props => [
@@ -63,5 +66,6 @@ class Movie extends Equatable {
         video,
         voteAverage,
         voteCount,
+        type,
       ];
 }

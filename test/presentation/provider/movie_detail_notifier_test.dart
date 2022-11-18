@@ -65,6 +65,7 @@ void main() {
     video: false,
     voteAverage: 1,
     voteCount: 1,
+    type: 'movie',
   );
   final tMovies = <Movie>[tMovie];
 

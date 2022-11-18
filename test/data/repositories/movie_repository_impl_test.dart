@@ -43,6 +43,7 @@ void main() {
     video: false,
     voteAverage: 7.2,
     voteCount: 13507,
+    type: 'movie',
   );
 
   final tMovie = Movie(
@@ -60,6 +61,7 @@ void main() {
     video: false,
     voteAverage: 7.2,
     voteCount: 13507,
+    type: 'movie',
   );
 
   final tMovieModelList = <MovieModel>[tMovieModel];
@@ -212,6 +214,7 @@ void main() {
       video: false,
       voteAverage: 1,
       voteCount: 1,
+      type: 'movie',
     );
 
     test(
@@ -401,7 +404,7 @@ void main() {
   group('get watchlist movies', () {
     test('should return list of Movies', () async {
       // arrange
-      when(mockLocalDataSource.getWatchlist())
+      when(mockLocalDataSource.getMovieWatchlist())
           .thenAnswer((_) async => [testMovieTable]);
       // act
       final result = await repository.getWatchlistMovies();

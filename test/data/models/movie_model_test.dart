@@ -17,6 +17,7 @@ void main() {
     video: false,
     voteAverage: 1,
     voteCount: 1,
+    type: 'movie',
   );
 
   final tMovie = Movie(
@@ -33,6 +34,7 @@ void main() {
     video: false,
     voteAverage: 1,
     voteCount: 1,
+    type: 'movie',
   );
 
   test('should be a subclass of Movie entity', () async {

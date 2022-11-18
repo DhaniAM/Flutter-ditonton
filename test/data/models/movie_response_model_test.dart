@@ -21,6 +21,7 @@ void main() {
     video: false,
     voteAverage: 1.0,
     voteCount: 1,
+    type: 'movie',
   );
   final tMovieResponseModel =
       MovieResponse(movieList: <MovieModel>[tMovieModel]);

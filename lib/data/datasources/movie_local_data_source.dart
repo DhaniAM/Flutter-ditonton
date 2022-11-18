@@ -6,7 +6,7 @@ abstract class MovieLocalDataSource {
   Future<String> insertWatchlist(MovieTable movie);
   Future<String> removeWatchlist(MovieTable movie);
   Future<MovieTable?> getMovieById(int id);
-  Future<List<MovieTable>> getWatchlist();
+  Future<List<MovieTable>> getMovieWatchlist();
 }
 
 class MovieLocalDataSourceImpl implements MovieLocalDataSource {
@@ -45,8 +45,8 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
   }
 
   @override
-  Future<List<MovieTable>> getWatchlist() async {
-    final result = await databaseHelper.getWatchlist();
+  Future<List<MovieTable>> getMovieWatchlist() async {
+    final result = await databaseHelper.getMovieWatchlist();
     return result.map((data) => MovieTable.fromJson(data)).toList();
   }
 }

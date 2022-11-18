@@ -1,6 +1,7 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/common/utils.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
+import 'package:ditonton/presentation/provider/watchlist_tv_series_notifier.dart';
 import 'package:ditonton/presentation/widgets/content_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,9 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
     Future.microtask(() =>
         Provider.of<WatchlistMovieNotifier>(context, listen: false)
             .fetchWatchlistMovies());
+    Future.microtask(() =>
+        Provider.of<WatchlistTvSeriesNotifier>(context, listen: false)
+            .fetchWatchlistTvSeries());
   }
 
   @override
@@ -31,6 +35,8 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
   void didPopNext() {
     Provider.of<WatchlistMovieNotifier>(context, listen: false)
         .fetchWatchlistMovies();
+    Provider.of<WatchlistTvSeriesNotifier>(context, listen: false)
+        .fetchWatchlistTvSeries();
   }
 
   @override
@@ -41,24 +47,28 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<WatchlistMovieNotifier>(
-          builder: (context, data, child) {
-            if (data.watchlistState == RequestState.Loading) {
+        child: Consumer2<WatchlistMovieNotifier, WatchlistTvSeriesNotifier>(
+          builder: (_, movieData, tvSeriesData, __) {
+            final movie = movieData.watchlistMovies;
+            final tvSeries = tvSeriesData.watchlistTvSeries;
+            final List<dynamic> result = [...movie, ...tvSeries];
+
+            if (movieData.watchlistState == RequestState.Loading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.watchlistState == RequestState.Loaded) {
+            } else if (movieData.watchlistState == RequestState.Loaded) {
               return ListView.builder(
-                itemBuilder: (context, index) {
-                  final movie = data.watchlistMovies[index];
-                  return ContentCardList(movie);
+                itemBuilder: (_, index) {
+                  final content = result[index];
+                  return ContentCardList(content);
                 },
-                itemCount: data.watchlistMovies.length,
+                itemCount: result.length,
               );
             } else {
               return Center(
                 key: Key('error_message'),
-                child: Text(data.message),
+                child: Text(movieData.message),
               );
             }
           },

@@ -66,9 +66,9 @@ void init() {
     () => MovieDetailNotifier(
       getMovieDetail: locator(),
       getMovieRecommendations: locator(),
-      getWatchListStatus: locator(),
-      saveWatchlist: locator(),
-      removeWatchlist: locator(),
+      getMovieWatchListStatus: locator(),
+      saveMovieWatchlist: locator(),
+      removeMovieWatchlist: locator(),
     ),
   );
   locator.registerFactory(

@@ -9,8 +9,21 @@ import 'package:ditonton/presentation/provider/bottom_navigation_bar_provider.da
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage();
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() =>
+        Provider.of<BottomNavigationBarNotifier>(context, listen: false)
+            .changeIndex(0));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,16 +76,16 @@ class HomePage extends StatelessWidget {
       body: Consumer<BottomNavigationBarNotifier>(
         builder: (context, value, child) {
           final RequestState state = value.requestState;
-          if (state == RequestState.Loading) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state == RequestState.Loaded) {
+          if (state == RequestState.Loaded) {
             if (value.index == 0) {
               return HomeMoviePage();
             } else {
               return HomeTvSeriesPage();
             }
+          } else if (state == RequestState.Loading) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           } else {
             return Center(
               child: Text('Failed'),

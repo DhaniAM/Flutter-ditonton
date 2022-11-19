@@ -131,6 +131,7 @@ final testMovieMap = {
   'overview': 'overview',
   'posterPath': 'posterPath',
   'title': 'title',
+  'type': 'movie',
 };
 
 final testTvSeriesMap = {
@@ -138,4 +139,5 @@ final testTvSeriesMap = {
   'overview': 'overview',
   'posterPath': 'posterPath',
   'title': 'title',
+  'type': 'tvSeries',
 };

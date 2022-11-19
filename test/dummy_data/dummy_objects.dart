@@ -1,8 +1,10 @@
 import 'package:ditonton/data/models/movie_table.dart';
+import 'package:ditonton/data/models/tv_series_table.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/domain/entities/seasons.dart';
+import 'package:ditonton/domain/entities/tv_series.dart';
 import 'package:ditonton/domain/entities/tv_series_detail.dart';
 
 final testMovie = Movie(
@@ -23,7 +25,26 @@ final testMovie = Movie(
   type: 'movie',
 );
 
+final testTvSeries = TvSeries(
+  posterPath: '/vC324sdfcS313vh9QXwijLIHPJp.jpg',
+  popularity: 10.12,
+  id: 25,
+  backdropPath: '/rQGBjWNveVeF8f2PGRtS85w9o9r.jpg',
+  voteAverage: 9.8798,
+  overview: 'overview',
+  firstAirDate: 'firstAirDate',
+  originCountry: ['originCountry'],
+  genreIds: [2141, 12412],
+  originalLanguage: 'originalLanguage',
+  voteCount: 10,
+  title: 'title',
+  originalName: 'originalName',
+  type: 'tvSeries',
+);
+
 final testMovieList = [testMovie];
+
+final testTvSeriesList = [testTvSeries];
 
 final testMovieDetail = MovieDetail(
   adult: false,
@@ -41,32 +62,37 @@ final testMovieDetail = MovieDetail(
   type: 'movie',
 );
 
-final testTvSeriesDetail = TvSeriesDetail(
-  overview: 'overview',
-  posterPath: 'posterPath',
-  voteCount: 99,
-  firstAirDate: 'firstAirDate',
-  voteAverage: 10.5,
-  backdropPath: 'backdropPath',
-  genres: [Genre(id: 1, name: 'Fantasy')],
-  id: 1,
-  lastAirDate: 'lastAirDate',
-  numberOfEpisodes: 22,
-  numberOfSeasons: 5,
-  seasons: [
-    Seasons(
-        airDate: 'airDate',
-        episodeCount: 22,
-        id: 1,
-        title: 'title',
-        overview: 'overview',
-        posterPath: 'posterPath',
-        seasonNumber: 2)
-  ],
-  tagline: 'tagline',
-  title: 'title',
-  type: 'tvSeries',
+final testGenre = Genre(
+  id: 21,
+  name: 'Action',
 );
+
+final testSeasons = Seasons(
+  airDate: 'airDate',
+  episodeCount: 15,
+  id: 21,
+  title: 'title',
+  overview: 'overview',
+  posterPath: '/suopoADq0k8YZr4dQXcU6pToj6s.jpg',
+  seasonNumber: 4,
+);
+
+final testTvSeriesDetail = TvSeriesDetail(
+    backdropPath: '/suopoADq0k8YZr4dQXcU6pToj6s.jpg',
+    firstAirDate: 'firstAirDate',
+    lastAirDate: 'lastAirDate',
+    genres: [testGenre],
+    id: 212,
+    title: 'title',
+    numberOfEpisodes: 5,
+    numberOfSeasons: 3,
+    overview: 'overview',
+    posterPath: '/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',
+    seasons: [testSeasons],
+    tagline: 'tagline',
+    voteAverage: 9.6587,
+    voteCount: 658,
+    type: 'tvSeries');
 
 final testWatchlistMovie = Movie.watchlist(
   id: 1,
@@ -74,6 +100,14 @@ final testWatchlistMovie = Movie.watchlist(
   posterPath: 'posterPath',
   overview: 'overview',
   type: 'movie',
+);
+
+final testWatchlistTvSeries = TvSeries.watchlist(
+  id: 2,
+  posterPath: 'posterPath',
+  overview: 'overview',
+  title: 'title',
+  type: 'tvSeries',
 );
 
 final testMovieTable = MovieTable(
@@ -84,8 +118,23 @@ final testMovieTable = MovieTable(
   type: 'movie',
 );
 
+final testTvSeriesTable = TvSeriesTable(
+  id: 2,
+  title: 'title',
+  posterPath: 'posterPath',
+  overview: 'overview',
+  type: 'tvSeries',
+);
+
 final testMovieMap = {
   'id': 1,
+  'overview': 'overview',
+  'posterPath': 'posterPath',
+  'title': 'title',
+};
+
+final testTvSeriesMap = {
+  'id': 2,
   'overview': 'overview',
   'posterPath': 'posterPath',
   'title': 'title',

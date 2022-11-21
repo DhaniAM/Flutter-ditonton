@@ -1,0 +1,37 @@
+{
+	"page": 1,
+	"results": [
+		{
+			"backdrop_path": "/AwB0BmQm1GxP0BH8ZL7WPNDTkb5.jpg",
+			"first_air_date": "2016-01-05",
+			"genre_ids": [10759, 10765],
+			"id": 64122,
+			"original_language": "en",
+			"original_name": "The Shannara Chronicles",
+			"overview": "A young Healer armed with an unpredictable magic guides a runaway Elf in her perilous quest to save the peoples of the Four Lands from an age-old Demon scourge.",
+			"origin_country": ["US"],
+			"poster_path": "/aurZJ8UsXqhGwwBnNuZsPNepY8y.jpg",
+			"popularity": 9.523348,
+			"name": "The Shannara Chronicles",
+			"vote_average": 5.5,
+			"vote_count": 61
+		},
+		{
+			"backdrop_path": "/erYc6rPUSsoxwMx4hStEjVP3X3J.jpg",
+			"first_air_date": "2012-08-07",
+			"genre_ids": [16, 10759, 10765, 35],
+			"id": 44305,
+			"original_language": "en",
+			"original_name": "DreamWorks Dragons",
+			"overview": "DreamWorks Dragons is an American computer-animated television series airing on Cartoon Network based on the 2010 film How to Train Your Dragon. The series serves as a bridge between the first film and its 2014 sequel. Riders of Berk follows Hiccup as he tries to keep balance within the new cohabitation of Dragons and Vikings. Alongside keeping up with Berk's newest installment — A Dragon Training Academy — Hiccup, Toothless, and the rest of the Viking Teens are put to the test when they are faced with new worlds harsher than Berk, new dragons that can't all be trained, and new enemies who are looking for every reason to destroy the harmony between Vikings and Dragons all together.",
+			"origin_country": ["US"],
+			"poster_path": "/8T8bAVzaKKyDNGQ6DQB3HF80wbJ.jpg",
+			"popularity": 11.861156,
+			"name": "DreamWorks Dragons",
+			"vote_average": 7.3,
+			"vote_count": 14
+		}
+	],
+	"total_pages": 10,
+	"total_results": 185
+}

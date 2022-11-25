@@ -66,7 +66,7 @@ class TvSeriesModel extends Equatable {
         'original_language': originalLanguage,
         'vote_count': voteCount,
         'title': title,
-        'originalName': originalName,
+        'original_name': originalName,
         'type': 'tvSeries'
       };
 

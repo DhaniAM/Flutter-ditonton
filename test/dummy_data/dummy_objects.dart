@@ -81,14 +81,29 @@ final testTvSeriesDetail = TvSeriesDetail(
     backdropPath: '/suopoADq0k8YZr4dQXcU6pToj6s.jpg',
     firstAirDate: 'firstAirDate',
     lastAirDate: 'lastAirDate',
-    genres: [testGenre],
+    genres: [
+      Genre(
+        id: 21,
+        name: 'Action',
+      )
+    ],
     id: 212,
     title: 'title',
     numberOfEpisodes: 5,
     numberOfSeasons: 3,
     overview: 'overview',
     posterPath: '/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',
-    seasons: [testSeasons],
+    seasons: [
+      Seasons(
+        airDate: 'airDate',
+        episodeCount: 15,
+        id: 21,
+        title: 'title',
+        overview: 'overview',
+        posterPath: '/suopoADq0k8YZr4dQXcU6pToj6s.jpg',
+        seasonNumber: 4,
+      )
+    ],
     tagline: 'tagline',
     voteAverage: 9.6587,
     voteCount: 658,
@@ -103,8 +118,8 @@ final testWatchlistMovie = Movie.watchlist(
 );
 
 final testWatchlistTvSeries = TvSeries.watchlist(
-  id: 2,
-  posterPath: 'posterPath',
+  id: 212,
+  posterPath: '/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',
   overview: 'overview',
   title: 'title',
   type: 'tvSeries',
@@ -119,9 +134,9 @@ final testMovieTable = MovieTable(
 );
 
 final testTvSeriesTable = TvSeriesTable(
-  id: 2,
+  id: 212,
   title: 'title',
-  posterPath: 'posterPath',
+  posterPath: '/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',
   overview: 'overview',
   type: 'tvSeries',
 );

@@ -45,6 +45,18 @@ void main() {
       // assert
       expect(result, tvSeriesList);
     });
+
+    test(
+        'should throw a ServerException when the response code is 404 or other',
+        () async {
+      // arrange
+      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/on_the_air?$API_KEY')))
+          .thenAnswer((_) async => http.Response('Not Found', 404));
+      // act
+      final call = dataSource.getNowPlayingTvSeries();
+      // assert
+      expect(() => call, throwsA(isA<ServerException>()));
+    });
   });
 
   group('get Popular Tv Series', () {

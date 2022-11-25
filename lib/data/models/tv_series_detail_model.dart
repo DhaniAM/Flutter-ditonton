@@ -60,25 +60,6 @@ class TvSeriesDetailResponse extends Equatable {
         type: 'tvSeries',
       );
 
-  /// Change to JSON from [TvSeriesDetailResponse]/model
-  Map<String, dynamic> toJson() => {
-        'backdrop_path': backdropPath,
-        'first_air_date': firstAirDate,
-        'last_air_Date': lastAirDate,
-        'genres': List<dynamic>.from(genres.map((x) => x.toJson())),
-        'id': id,
-        'title': title,
-        'number_of_episodes': numberOfEpisodes,
-        'number_of_seasons': numberOfSeasons,
-        'overview': overview,
-        'poster_path': posterPath,
-        'seasons': List<dynamic>.from(seasons.map((x) => x.toJson())),
-        'tagline': tagline,
-        'vote_average': voteAverage,
-        'vote_count': voteCount,
-        'type': 'tvSeries',
-      };
-
   /// Change to [TvSeriesDetail] from [TvSeriesDetailResponse]/model
   TvSeriesDetail toEntity() {
     return TvSeriesDetail(

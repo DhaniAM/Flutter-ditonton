@@ -52,11 +52,13 @@ class MovieDetailResponse extends Equatable {
   final String type;
 
   /// Convert JSON/Database to [MovieDetailResponse]
-  factory MovieDetailResponse.fromJson(Map<String, dynamic> json) => MovieDetailResponse(
+  factory MovieDetailResponse.fromJson(Map<String, dynamic> json) =>
+      MovieDetailResponse(
         adult: json["adult"],
         backdropPath: json["backdrop_path"],
         budget: json["budget"],
-        genres: List<GenreModel>.from(json["genres"].map((x) => GenreModel.fromJson(x))),
+        genres: List<GenreModel>.from(
+            json["genres"].map((x) => GenreModel.fromJson(x))),
         homepage: json["homepage"],
         id: json["id"],
         imdbId: json["imdb_id"],
@@ -76,32 +78,6 @@ class MovieDetailResponse extends Equatable {
         voteCount: json["vote_count"],
         type: 'movie',
       );
-
-  /// Convert [MovieDetailResponse] to JSON/Database
-  Map<String, dynamic> toJson() => {
-        "adult": adult,
-        "backdrop_path": backdropPath,
-        "budget": budget,
-        "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
-        "homepage": homepage,
-        "id": id,
-        "imdb_id": imdbId,
-        "original_language": originalLanguage,
-        "original_title": originalTitle,
-        "overview": overview,
-        "popularity": popularity,
-        "poster_path": posterPath,
-        "release_date": releaseDate,
-        "revenue": revenue,
-        "runtime": runtime,
-        "status": status,
-        "tagline": tagline,
-        "title": title,
-        "video": video,
-        "vote_average": voteAverage,
-        "vote_count": voteCount,
-        "type": "movie",
-      };
 
   /// Convert from [MovieDetailResponse]/model to [MovieDetail]
   MovieDetail toEntity() {

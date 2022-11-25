@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">8</td>
             <td class="headerCovTableEntry">11</td>
-            <td class="headerCovTableEntryLo">0.0 %</td>
+            <td class="headerCovTableEntryLo">72.7 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-11-19 11:09:51</td>
+            <td class="headerValue">2022-11-25 21:23:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -64,7 +64,7 @@
 <a name="2"><span class="lineNum">       2 </span>            : import 'package:equatable/equatable.dart';</a>
 <a name="3"><span class="lineNum">       3 </span>            : </a>
 <a name="4"><span class="lineNum">       4 </span>            : class GenreModel extends Equatable {</a>
-<a name="5"><span class="lineNum">       5 </span><span class="lineNoCov">          0 :   GenreModel({</span></a>
+<a name="5"><span class="lineNum">       5 </span><span class="lineCov">          4 :   GenreModel({</span></a>
 <a name="6"><span class="lineNum">       6 </span>            :     required this.id,</a>
 <a name="7"><span class="lineNum">       7 </span>            :     required this.name,</a>
 <a name="8"><span class="lineNum">       8 </span>            :   });</a>
@@ -73,9 +73,9 @@
 <a name="11"><span class="lineNum">      11 </span>            :   final String name;</a>
 <a name="12"><span class="lineNum">      12 </span>            : </a>
 <a name="13"><span class="lineNum">      13 </span>            :   /// Convert JSON/Database to [GenreModel]</a>
-<a name="14"><span class="lineNum">      14 </span><span class="lineNoCov">          0 :   factory GenreModel.fromJson(Map&lt;String, dynamic&gt; json) =&gt; GenreModel(</span></a>
-<a name="15"><span class="lineNum">      15 </span><span class="lineNoCov">          0 :         id: json[&quot;id&quot;],</span></a>
-<a name="16"><span class="lineNum">      16 </span><span class="lineNoCov">          0 :         name: json[&quot;name&quot;],</span></a>
+<a name="14"><span class="lineNum">      14 </span><span class="lineCov">          4 :   factory GenreModel.fromJson(Map&lt;String, dynamic&gt; json) =&gt; GenreModel(</span></a>
+<a name="15"><span class="lineNum">      15 </span><span class="lineCov">          2 :         id: json[&quot;id&quot;],</span></a>
+<a name="16"><span class="lineNum">      16 </span><span class="lineCov">          2 :         name: json[&quot;name&quot;],</span></a>
 <a name="17"><span class="lineNum">      17 </span>            :       );</a>
 <a name="18"><span class="lineNum">      18 </span>            : </a>
 <a name="19"><span class="lineNum">      19 </span>            :   /// Convert from [GenreModel] to JSON or Map&lt;String, dynamic&gt;</a>
@@ -85,12 +85,12 @@
 <a name="23"><span class="lineNum">      23 </span>            :       };</a>
 <a name="24"><span class="lineNum">      24 </span>            : </a>
 <a name="25"><span class="lineNum">      25 </span>            :   /// Convert from [GenreModel] to [Genre] object</a>
-<a name="26"><span class="lineNum">      26 </span><span class="lineNoCov">          0 :   Genre toEntity() {</span></a>
-<a name="27"><span class="lineNum">      27 </span><span class="lineNoCov">          0 :     return Genre(id: this.id, name: this.name);</span></a>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">          2 :   Genre toEntity() {</span></a>
+<a name="27"><span class="lineNum">      27 </span><span class="lineCov">          6 :     return Genre(id: this.id, name: this.name);</span></a>
 <a name="28"><span class="lineNum">      28 </span>            :   }</a>
 <a name="29"><span class="lineNum">      29 </span>            : </a>
-<a name="30"><span class="lineNum">      30 </span><span class="lineNoCov">          0 :   @override</span></a>
-<a name="31"><span class="lineNum">      31 </span><span class="lineNoCov">          0 :   List&lt;Object?&gt; get props =&gt; [id, name];</span></a>
+<a name="30"><span class="lineNum">      30 </span><span class="lineCov">          2 :   @override</span></a>
+<a name="31"><span class="lineNum">      31 </span><span class="lineCov">          6 :   List&lt;Object?&gt; get props =&gt; [id, name];</span></a>
 <a name="32"><span class="lineNum">      32 </span>            : }</a>
 </pre>
       </td>

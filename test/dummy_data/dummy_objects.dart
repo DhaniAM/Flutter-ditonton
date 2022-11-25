@@ -150,9 +150,9 @@ final testMovieMap = {
 };
 
 final testTvSeriesMap = {
-  'id': 2,
+  'id': 212,
   'overview': 'overview',
-  'posterPath': 'posterPath',
+  'posterPath': '/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg',
   'title': 'title',
   'type': 'tvSeries',
 };

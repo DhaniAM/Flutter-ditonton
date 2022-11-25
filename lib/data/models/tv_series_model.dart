@@ -86,7 +86,7 @@ class TvSeriesModel extends Equatable {
       voteCount: voteCount,
       title: title,
       originalName: originalName,
-      type: 'tvSeries',
+      type: this.type,
     );
   }
 

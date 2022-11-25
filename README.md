@@ -58,3 +58,6 @@ Jika kamu menerapkan modular pada project, Anda dapat memanfaatkan berkas `test.
 test:
 flutter test --coverage
 ./genhtml.perl ./coverage/lcov.info -o coverage/html
+
+build mock:
+flutter pub run build_runner build

@@ -1,11 +1,12 @@
 import 'dart:convert';
-import 'dart:math';
+import 'dart:io';
 
+import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/data/datasources/tv_series_remote_data_source.dart';
 import 'package:ditonton/data/models/tv_series_response.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
+import 'package:mockito/mockito.dart';
 
 import '../../helpers/test_helper.mocks.dart';
 import '../../json_reader.dart';
@@ -23,18 +24,66 @@ void main() {
   });
 
   group('get Now Playing Tv Series', () {
-    final tvSeriesList =
-        TvSeriesResponse.fromJson(json.decode(readJson('dummy_data/now_playing.json')))
-            .tvSeriesList;
+    final tvSeriesList = TvSeriesResponse.fromJson(
+            json.decode(readJson('dummy_data/now_playing_tv_series.json')))
+        .tvSeriesList;
 
-    test('should return list of Movie Model when the responde is 200', () async {
+    test('should return list of Movie Model when the responde is 200',
+        () async {
       // arrange
-      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/on_the_air?$API_KEY'))).thenAnswer(
-          (_) async => http.Response(readJson('dummy_data/now_playing_tv_series.json'), 200));
+      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/on_the_air?$API_KEY')))
+          .thenAnswer((_) async => http.Response(
+                  readJson('dummy_data/now_playing_tv_series.json'), 200,
+                  headers: {
+                    HttpHeaders.contentTypeHeader:
+                        'application/json; charset=utf-8',
+                  }));
       // act
       final result = await dataSource.getNowPlayingTvSeries();
       // assert
-      expect(result, equals(tvSeriesList));
+      expect(result, tvSeriesList);
     });
   });
+
+  group('get Popular Tv Series', () {
+    final tvSeriesList = TvSeriesResponse.fromJson(
+            json.decode(readJson('dummy_data/popular_tv_series.json')))
+        .tvSeriesList;
+
+    test('should return list of tv series when response is success (200)',
+        () async {
+      // arrange
+      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/popular?$API_KEY')))
+          .thenAnswer((_) async => http.Response(
+                  readJson('dummy_data/popular_tv_series.json'), 200,
+                  headers: {
+                    HttpHeaders.contentTypeHeader:
+                        'application/json; charset=utf-8',
+                  }));
+      // act
+      final result = await dataSource.getPopularTvSeries();
+      // assert
+      expect(result, tvSeriesList);
+    });
+
+    test(
+        'should throw a ServerException when the response code is 404 or other',
+        () async {
+      // arrange
+      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/popular?$API_KEY')))
+          .thenAnswer((_) async => http.Response('Not Found', 404));
+      // act
+      final call = dataSource.getPopularTvSeries();
+      // assert
+      expect(() => call, throwsA(isA<ServerException>()));
+    });
+  });
+
+  group('get Top Rated Tv Series', () {});
+
+  group('get Tv Series detail', () {});
+
+  group('get Tv Series recommendation', () {});
+
+  group('search tv series', () {});
 }

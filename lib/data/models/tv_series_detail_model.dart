@@ -23,7 +23,7 @@ class TvSeriesDetailResponse extends Equatable {
   });
 
   final String? backdropPath;
-  final String firstAirDate;
+  final String? firstAirDate;
   final String lastAirDate;
   final List<GenreModel> genres;
   final int id;

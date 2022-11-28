@@ -12,7 +12,11 @@ import 'package:mockito/mockito.dart';
 
 import 'movie_list_notifier_test.mocks.dart';
 
-@GenerateMocks([GetNowPlayingMovies, GetPopularMovies, GetTopRatedMovies])
+@GenerateMocks([
+  GetNowPlayingMovies,
+  GetPopularMovies,
+  GetTopRatedMovies,
+])
 void main() {
   late MovieListNotifier provider;
   late MockGetNowPlayingMovies mockGetNowPlayingMovies;

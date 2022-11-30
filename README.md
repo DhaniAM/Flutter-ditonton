@@ -56,6 +56,7 @@ Jika kamu menerapkan modular pada project, Anda dapat memanfaatkan berkas `test.
 4. Tunggu proses testing selesai hingga muncul web terkait laporan coverage.
 
 test:
+./test.sh
 flutter test --coverage
 ./genhtml.perl ./coverage/lcov.info -o coverage/html
 

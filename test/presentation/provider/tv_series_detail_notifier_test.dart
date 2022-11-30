@@ -191,6 +191,20 @@ void main() {
       verify(mockRemoveWatchlist.execute(testTvSeriesDetail));
     });
 
+    test('should get fail message when removing from watchlist is failed',
+        () async {
+      // arrange
+      when(mockRemoveWatchlist.execute(testTvSeriesDetail))
+          .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
+      when(mockGetWatchlistStatus.execute(testTvSeriesDetail.id))
+          .thenAnswer((_) async => false);
+      // act
+      await provider.removeFromWatchlist(testTvSeriesDetail);
+      // assert
+      expect(provider.watchlistMessage, 'Failed');
+      expect(provider.isAddedToWatchlist, false);
+    });
+
     test('should update watchlist status when add watchlist success', () async {
       // arrange
       when(mockSaveWatchlist.execute(testTvSeriesDetail))

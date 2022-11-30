@@ -1,3 +1,4 @@
+import 'package:ditonton/data/datasources/db/database_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -5,47 +6,51 @@ import '../../../dummy_data/dummy_objects.dart';
 import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late MockDatabaseHelper databaseHelper;
-  // late Database? database;
-  const String tblWatchlist = 'watchlist';
+  late MockDatabaseHelper mockDatabaseHelper;
+  late DatabaseHelper databaseHelper;
 
+  const String tblWatchlist = 'watchlist';
   const tId = 25;
+
   List<Map<String, dynamic>> tListMovies = [testMovieMap];
   List<Map<String, dynamic>> tListTvSeries = [testTvSeriesMap];
 
   setUp(() async {
-    databaseHelper = MockDatabaseHelper();
+    mockDatabaseHelper = MockDatabaseHelper();
+    databaseHelper = DatabaseHelper();
     // database = await databaseHelper.database;
   });
 
   group('Movie database', () {
     test('should return success when inserting movie to db', () async {
       // arrange
-      when(databaseHelper.insertMovieWatchlist(testMovieTable))
+      when(mockDatabaseHelper.insertMovieWatchlist(testMovieTable))
           .thenAnswer((_) async => tId);
       // act
-      final result = await databaseHelper.insertMovieWatchlist(testMovieTable);
+      final result =
+          await mockDatabaseHelper.insertMovieWatchlist(testMovieTable);
       // assert
       expect(result, tId);
     });
 
     test('should return success when removing from db', () async {
       // arrange
-      when(databaseHelper.removeMovieWatchlist(testMovieTable))
+      when(mockDatabaseHelper.removeMovieWatchlist(testMovieTable))
           .thenAnswer((_) async => tId);
 
       // act
-      final result = await databaseHelper.removeMovieWatchlist(testMovieTable);
+      final result =
+          await mockDatabaseHelper.removeMovieWatchlist(testMovieTable);
       // assert
       expect(result, tId);
     });
 
     test('should return movie json from db', () async {
       // arrange
-      when(databaseHelper.getContentById(tId))
+      when(mockDatabaseHelper.getContentById(tId))
           .thenAnswer((_) async => testMovieMap);
       // act
-      final result = await databaseHelper.getContentById(tId);
+      final result = await mockDatabaseHelper.getContentById(tId);
       print(result);
       // assert
       expect(result, testMovieMap);
@@ -53,10 +58,10 @@ void main() {
 
     test('should return list of movies from db', () async {
       // arrange
-      when(databaseHelper.getMovieWatchlist())
+      when(mockDatabaseHelper.getMovieWatchlist())
           .thenAnswer((_) async => tListMovies);
       // act
-      final result = await databaseHelper.getMovieWatchlist();
+      final result = await mockDatabaseHelper.getMovieWatchlist();
       // assert
       expect(result, tListMovies);
     });
@@ -65,42 +70,42 @@ void main() {
   group('Tv series database', () {
     test('should return success when inserted to db', () async {
       // arrange
-      when(databaseHelper.insertTvSeriesWatchlist(testTvSeriesTable))
+      when(mockDatabaseHelper.insertTvSeriesWatchlist(testTvSeriesTable))
           .thenAnswer((_) async => tId);
       // act
       final result =
-          await databaseHelper.insertTvSeriesWatchlist(testTvSeriesTable);
+          await mockDatabaseHelper.insertTvSeriesWatchlist(testTvSeriesTable);
       // assert
       expect(result, tId);
     });
 
     test('should return success when removing from db', () async {
       // arrange
-      when(databaseHelper.removeTvSeriesWatchlist(testTvSeriesTable))
+      when(mockDatabaseHelper.removeTvSeriesWatchlist(testTvSeriesTable))
           .thenAnswer((_) async => tId);
       // act
       final result =
-          await databaseHelper.removeTvSeriesWatchlist(testTvSeriesTable);
+          await mockDatabaseHelper.removeTvSeriesWatchlist(testTvSeriesTable);
       // assert
       expect(result, tId);
     });
 
     test('should return tv series json from db', () async {
       // arrange
-      when(databaseHelper.getContentById(tId))
+      when(mockDatabaseHelper.getContentById(tId))
           .thenAnswer((_) async => testTvSeriesMap);
       // act
-      final result = await databaseHelper.getContentById(tId);
+      final result = await mockDatabaseHelper.getContentById(tId);
       // assert
       expect(result, testTvSeriesMap);
     });
 
     test('should return list of tv series from db', () async {
       // arrange
-      when(databaseHelper.getTvSeriesWatchlist())
+      when(mockDatabaseHelper.getTvSeriesWatchlist())
           .thenAnswer((_) async => tListTvSeries);
       // act
-      final result = await databaseHelper.getTvSeriesWatchlist();
+      final result = await mockDatabaseHelper.getTvSeriesWatchlist();
       // assert
       expect(result, tListTvSeries);
     });

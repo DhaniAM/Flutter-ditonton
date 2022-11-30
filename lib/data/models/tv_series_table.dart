@@ -35,6 +35,7 @@ class TvSeriesTable extends Equatable {
         type: 'tvSeries',
       );
 
+  /// used by [DatabaseHelper]
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,

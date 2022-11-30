@@ -1,34 +1,33 @@
+import 'package:ditonton/data/datasources/db/database_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../dummy_data/dummy_objects.dart';
-import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late MockDatabaseHelper databaseHelper;
+  DatabaseHelper databaseHelper = DatabaseHelper();
+  const String tblWatchlist = 'watchlist';
+
   const tId = 25;
   List<Map<String, dynamic>> tListMovies = [testMovieMap];
   List<Map<String, dynamic>> tListTvSeries = [testTvSeriesMap];
 
-  setUp(() {
-    databaseHelper = MockDatabaseHelper();
-  });
-
   group('Movie database', () {
-    test('should return success when inserted to db', () async {
+    test('should return success when inserting movie to db', () async {
       // arrange
       when(databaseHelper.insertMovieWatchlist(testMovieTable))
           .thenAnswer((_) async => tId);
       // act
-      final result = await databaseHelper.insertMovieWatchlist(testMovieTable);
+      final resultDbImpl = databaseHelper.insertMovieWatchlist(testMovieTable);
       // assert
-      expect(result, tId);
+      expect(resultDbImpl, tId);
     });
 
     test('should return success when removing from db', () async {
       // arrange
       when(databaseHelper.removeMovieWatchlist(testMovieTable))
           .thenAnswer((_) async => tId);
+
       // act
       final result = await databaseHelper.removeMovieWatchlist(testMovieTable);
       // assert

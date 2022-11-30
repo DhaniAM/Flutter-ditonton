@@ -37,6 +37,7 @@ class MovieTable extends Equatable {
       );
 
   /// Change to JSON/Database format from [MovieTable]
+  /// used by [DatabaseHelper]
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,

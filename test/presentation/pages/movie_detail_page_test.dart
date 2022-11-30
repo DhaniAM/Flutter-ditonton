@@ -105,4 +105,27 @@ void main() {
     expect(find.byType(AlertDialog), findsOneWidget);
     expect(find.text('Failed'), findsOneWidget);
   });
+
+  testWidgets('Should display loading screen when on loading state',
+      (WidgetTester tester) async {
+    when(mockNotifier.movieState).thenReturn(RequestState.loading);
+
+    final loadingScreen = find.byType(CircularProgressIndicator);
+
+    await tester.pumpWidget(_makeTestableWidget(MovieDetailPage(id: 1)));
+
+    expect(loadingScreen, findsOneWidget);
+  });
+
+  testWidgets(
+    'Should display error text when on error state',
+    (WidgetTester tester) async {
+      when(mockNotifier.movieState).thenReturn(RequestState.error);
+      when(mockNotifier.message).thenReturn('Error');
+
+      await tester.pumpWidget(_makeTestableWidget(MovieDetailPage(id: 1)));
+
+      expect(find.text('Error'), findsOneWidget);
+    },
+  );
 }

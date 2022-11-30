@@ -6,7 +6,6 @@ import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late MockDatabaseHelper mockDatabaseHelper;
-  const String tblWatchlist = 'watchlist';
   const tId = 25;
 
   List<Map<String, dynamic>> tListMovies = [testMovieMap];

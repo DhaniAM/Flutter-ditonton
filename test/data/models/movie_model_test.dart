@@ -2,6 +2,8 @@ import 'package:ditonton/data/models/movie_model.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../dummy_data/dummy_objects.dart';
+
 void main() {
   final tMovieModel = MovieModel(
     adult: false,
@@ -40,5 +42,10 @@ void main() {
   test('should be a subclass of Movie entity', () async {
     final result = tMovieModel.toEntity();
     expect(result, tMovie);
+  });
+
+  test('should return JSON format from MovieTable', () {
+    final result = testMovieTable.toJson();
+    expect(result, testMovieMap);
   });
 }

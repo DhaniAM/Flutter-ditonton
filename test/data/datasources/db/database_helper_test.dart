@@ -1,4 +1,3 @@
-import 'package:ditonton/data/datasources/db/database_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -7,8 +6,6 @@ import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late MockDatabaseHelper mockDatabaseHelper;
-  late DatabaseHelper databaseHelper;
-
   const String tblWatchlist = 'watchlist';
   const tId = 25;
 
@@ -17,8 +14,6 @@ void main() {
 
   setUp(() async {
     mockDatabaseHelper = MockDatabaseHelper();
-    databaseHelper = DatabaseHelper();
-    // database = await databaseHelper.database;
   });
 
   group('Movie database', () {

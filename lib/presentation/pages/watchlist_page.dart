@@ -52,11 +52,11 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
             final tvSeries = tvSeriesData.watchlistTvSeries;
             final List<dynamic> result = [...movie, ...tvSeries];
 
-            if (movieData.watchlistState == RequestState.Loading) {
+            if (movieData.watchlistState == RequestState.loading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (movieData.watchlistState == RequestState.Loaded) {
+            } else if (movieData.watchlistState == RequestState.loaded) {
               return ListView.builder(
                 itemBuilder: (_, index) {
                   final content = result[index];

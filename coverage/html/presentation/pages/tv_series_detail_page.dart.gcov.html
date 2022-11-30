@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-11-28 11:32:27</td>
+            <td class="headerValue">2022-11-30 12:42:52</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -100,11 +100,11 @@
 <a name="38"><span class="lineNum">      38 </span><span class="lineNoCov">          0 :     return Scaffold(</span></a>
 <a name="39"><span class="lineNum">      39 </span><span class="lineNoCov">          0 :       body: Consumer&lt;TvSeriesDetailNotifier&gt;(</span></a>
 <a name="40"><span class="lineNum">      40 </span><span class="lineNoCov">          0 :         builder: (context, provider, child) {</span></a>
-<a name="41"><span class="lineNum">      41 </span><span class="lineNoCov">          0 :           if (provider.tvSeriesState == RequestState.Loading) {</span></a>
+<a name="41"><span class="lineNum">      41 </span><span class="lineNoCov">          0 :           if (provider.tvSeriesState == RequestState.loading) {</span></a>
 <a name="42"><span class="lineNum">      42 </span><span class="lineNoCov">          0 :             return Center(</span></a>
 <a name="43"><span class="lineNum">      43 </span><span class="lineNoCov">          0 :               child: CircularProgressIndicator(),</span></a>
 <a name="44"><span class="lineNum">      44 </span>            :             );</a>
-<a name="45"><span class="lineNum">      45 </span><span class="lineNoCov">          0 :           } else if (provider.tvSeriesState == RequestState.Loaded) {</span></a>
+<a name="45"><span class="lineNum">      45 </span><span class="lineNoCov">          0 :           } else if (provider.tvSeriesState == RequestState.loaded) {</span></a>
 <a name="46"><span class="lineNum">      46 </span><span class="lineNoCov">          0 :             final tvSeries = provider.tvSeries;</span></a>
 <a name="47"><span class="lineNum">      47 </span><span class="lineNoCov">          0 :             return SafeArea(</span></a>
 <a name="48"><span class="lineNum">      48 </span><span class="lineNoCov">          0 :               child: DetailContent(</span></a>
@@ -310,15 +310,15 @@
 <a name="248"><span class="lineNum">     248 </span><span class="lineNoCov">          0 :                             Consumer&lt;TvSeriesDetailNotifier&gt;(</span></a>
 <a name="249"><span class="lineNum">     249 </span><span class="lineNoCov">          0 :                               builder: (context, data, child) {</span></a>
 <a name="250"><span class="lineNum">     250 </span><span class="lineNoCov">          0 :                                 if (data.recommendationState ==</span></a>
-<a name="251"><span class="lineNum">     251 </span>            :                                     RequestState.Loading) {</a>
+<a name="251"><span class="lineNum">     251 </span>            :                                     RequestState.loading) {</a>
 <a name="252"><span class="lineNum">     252 </span><span class="lineNoCov">          0 :                                   return Center(</span></a>
 <a name="253"><span class="lineNum">     253 </span><span class="lineNoCov">          0 :                                     child: CircularProgressIndicator(),</span></a>
 <a name="254"><span class="lineNum">     254 </span>            :                                   );</a>
 <a name="255"><span class="lineNum">     255 </span><span class="lineNoCov">          0 :                                 } else if (data.recommendationState ==</span></a>
-<a name="256"><span class="lineNum">     256 </span>            :                                     RequestState.Error) {</a>
+<a name="256"><span class="lineNum">     256 </span>            :                                     RequestState.error) {</a>
 <a name="257"><span class="lineNum">     257 </span><span class="lineNoCov">          0 :                                   return Text(data.message);</span></a>
 <a name="258"><span class="lineNum">     258 </span><span class="lineNoCov">          0 :                                 } else if (data.recommendationState ==</span></a>
-<a name="259"><span class="lineNum">     259 </span>            :                                     RequestState.Loaded) {</a>
+<a name="259"><span class="lineNum">     259 </span>            :                                     RequestState.loaded) {</a>
 <a name="260"><span class="lineNum">     260 </span><span class="lineNoCov">          0 :                                   return Container(</span></a>
 <a name="261"><span class="lineNum">     261 </span>            :                                     height: 150,</a>
 <a name="262"><span class="lineNum">     262 </span><span class="lineNoCov">          0 :                                     child: ListView.builder(</span></a>

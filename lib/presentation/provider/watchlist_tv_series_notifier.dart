@@ -7,7 +7,7 @@ class WatchlistTvSeriesNotifier extends ChangeNotifier {
   var _watchlistTvSeries = <TvSeries>[];
   List<TvSeries> get watchlistTvSeries => _watchlistTvSeries;
 
-  var _watchlistState = RequestState.Empty;
+  var _watchlistState = RequestState.empty;
   RequestState get watchlistState => _watchlistState;
 
   String _message = '';
@@ -18,18 +18,18 @@ class WatchlistTvSeriesNotifier extends ChangeNotifier {
   final GetWatchlistTvSeries getWatchlistTvSeries;
 
   Future<void> fetchWatchlistTvSeries() async {
-    _watchlistState = RequestState.Loading;
+    _watchlistState = RequestState.loading;
     notifyListeners();
 
     final result = await getWatchlistTvSeries.execute();
     result.fold(
       (failure) {
-        _watchlistState = RequestState.Error;
+        _watchlistState = RequestState.error;
         _message = failure.message;
         notifyListeners();
       },
       (tvSeries) {
-        _watchlistState = RequestState.Loaded;
+        _watchlistState = RequestState.loaded;
         _watchlistTvSeries = tvSeries;
         notifyListeners();
       },

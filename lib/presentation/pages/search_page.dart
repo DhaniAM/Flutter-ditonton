@@ -43,11 +43,11 @@ class SearchPage extends StatelessWidget {
             ),
             Consumer2<MovieSearchNotifier, TvSeriesSearchNotifier>(
               builder: (context, movieData, tvSeriesData, child) {
-                if (movieData.state == RequestState.Loading) {
+                if (movieData.state == RequestState.loading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (movieData.state == RequestState.Loaded) {
+                } else if (movieData.state == RequestState.loaded) {
                   List results = mergeResults(
                       movieData.searchResult, tvSeriesData.searchResult);
 

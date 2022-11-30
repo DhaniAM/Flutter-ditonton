@@ -76,13 +76,13 @@ class _HomePageState extends State<HomePage> {
       body: Consumer<BottomNavigationBarNotifier>(
         builder: (context, value, child) {
           final RequestState state = value.requestState;
-          if (state == RequestState.Loaded) {
+          if (state == RequestState.loaded) {
             if (value.index == 0) {
               return HomeMoviePage();
             } else {
               return HomeTvSeriesPage();
             }
-          } else if (state == RequestState.Loading) {
+          } else if (state == RequestState.loading) {
             return Center(
               child: CircularProgressIndicator(),
             );

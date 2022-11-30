@@ -14,6 +14,8 @@ class DatabaseHelper {
 
   static Database? _database;
 
+  static const String _tblWatchlist = 'watchlist';
+
   /// Init db when db is null
   Future<Database?> get database async {
     if (_database == null) {
@@ -28,8 +30,6 @@ class DatabaseHelper {
     var db = await openDatabase(databasePath, version: 1, onCreate: _onCreate);
     return db;
   }
-
-  static const String _tblWatchlist = 'watchlist';
 
   void _onCreate(Database db, int version) async {
     await db.execute('''

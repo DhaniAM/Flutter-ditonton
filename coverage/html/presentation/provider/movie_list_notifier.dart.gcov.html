@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-11-28 11:32:27</td>
+            <td class="headerValue">2022-11-30 12:42:52</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -71,19 +71,19 @@
 <a name="9"><span class="lineNum">       9 </span>            :   var _nowPlayingMovies = &lt;Movie&gt;[];</a>
 <a name="10"><span class="lineNum">      10 </span><span class="lineCov">          2 :   List&lt;Movie&gt; get nowPlayingMovies =&gt; _nowPlayingMovies;</span></a>
 <a name="11"><span class="lineNum">      11 </span>            : </a>
-<a name="12"><span class="lineNum">      12 </span>            :   RequestState _nowPlayingState = RequestState.Empty;</a>
+<a name="12"><span class="lineNum">      12 </span>            :   RequestState _nowPlayingState = RequestState.empty;</a>
 <a name="13"><span class="lineNum">      13 </span><span class="lineCov">          2 :   RequestState get nowPlayingState =&gt; _nowPlayingState;</span></a>
 <a name="14"><span class="lineNum">      14 </span>            : </a>
 <a name="15"><span class="lineNum">      15 </span>            :   var _popularMovies = &lt;Movie&gt;[];</a>
 <a name="16"><span class="lineNum">      16 </span><span class="lineCov">          2 :   List&lt;Movie&gt; get popularMovies =&gt; _popularMovies;</span></a>
 <a name="17"><span class="lineNum">      17 </span>            : </a>
-<a name="18"><span class="lineNum">      18 </span>            :   RequestState _popularMoviesState = RequestState.Empty;</a>
+<a name="18"><span class="lineNum">      18 </span>            :   RequestState _popularMoviesState = RequestState.empty;</a>
 <a name="19"><span class="lineNum">      19 </span><span class="lineCov">          2 :   RequestState get popularMoviesState =&gt; _popularMoviesState;</span></a>
 <a name="20"><span class="lineNum">      20 </span>            : </a>
 <a name="21"><span class="lineNum">      21 </span>            :   var _topRatedMovies = &lt;Movie&gt;[];</a>
 <a name="22"><span class="lineNum">      22 </span><span class="lineCov">          2 :   List&lt;Movie&gt; get topRatedMovies =&gt; _topRatedMovies;</span></a>
 <a name="23"><span class="lineNum">      23 </span>            : </a>
-<a name="24"><span class="lineNum">      24 </span>            :   RequestState _topRatedMoviesState = RequestState.Empty;</a>
+<a name="24"><span class="lineNum">      24 </span>            :   RequestState _topRatedMoviesState = RequestState.empty;</a>
 <a name="25"><span class="lineNum">      25 </span><span class="lineCov">          2 :   RequestState get topRatedMoviesState =&gt; _topRatedMoviesState;</span></a>
 <a name="26"><span class="lineNum">      26 </span>            : </a>
 <a name="27"><span class="lineNum">      27 </span>            :   String _message = '';</a>
@@ -100,18 +100,18 @@
 <a name="38"><span class="lineNum">      38 </span>            :   final GetTopRatedMovies getTopRatedMovies;</a>
 <a name="39"><span class="lineNum">      39 </span>            : </a>
 <a name="40"><span class="lineNum">      40 </span><span class="lineCov">          1 :   Future&lt;void&gt; fetchNowPlayingMovies() async {</span></a>
-<a name="41"><span class="lineNum">      41 </span><span class="lineCov">          1 :     _nowPlayingState = RequestState.Loading;</span></a>
+<a name="41"><span class="lineNum">      41 </span><span class="lineCov">          1 :     _nowPlayingState = RequestState.loading;</span></a>
 <a name="42"><span class="lineNum">      42 </span><span class="lineCov">          1 :     notifyListeners();</span></a>
 <a name="43"><span class="lineNum">      43 </span>            : </a>
 <a name="44"><span class="lineNum">      44 </span><span class="lineCov">          2 :     final result = await getNowPlayingMovies.execute();</span></a>
 <a name="45"><span class="lineNum">      45 </span><span class="lineCov">          1 :     result.fold(</span></a>
 <a name="46"><span class="lineNum">      46 </span><span class="lineCov">          1 :       (failure) {</span></a>
-<a name="47"><span class="lineNum">      47 </span><span class="lineCov">          1 :         _nowPlayingState = RequestState.Error;</span></a>
+<a name="47"><span class="lineNum">      47 </span><span class="lineCov">          1 :         _nowPlayingState = RequestState.error;</span></a>
 <a name="48"><span class="lineNum">      48 </span><span class="lineCov">          2 :         _message = failure.message;</span></a>
 <a name="49"><span class="lineNum">      49 </span><span class="lineCov">          1 :         notifyListeners();</span></a>
 <a name="50"><span class="lineNum">      50 </span>            :       },</a>
 <a name="51"><span class="lineNum">      51 </span><span class="lineCov">          1 :       (moviesData) {</span></a>
-<a name="52"><span class="lineNum">      52 </span><span class="lineCov">          1 :         _nowPlayingState = RequestState.Loaded;</span></a>
+<a name="52"><span class="lineNum">      52 </span><span class="lineCov">          1 :         _nowPlayingState = RequestState.loaded;</span></a>
 <a name="53"><span class="lineNum">      53 </span><span class="lineCov">          1 :         _nowPlayingMovies = moviesData;</span></a>
 <a name="54"><span class="lineNum">      54 </span><span class="lineCov">          1 :         notifyListeners();</span></a>
 <a name="55"><span class="lineNum">      55 </span>            :       },</a>
@@ -119,18 +119,18 @@
 <a name="57"><span class="lineNum">      57 </span>            :   }</a>
 <a name="58"><span class="lineNum">      58 </span>            : </a>
 <a name="59"><span class="lineNum">      59 </span><span class="lineCov">          1 :   Future&lt;void&gt; fetchPopularMovies() async {</span></a>
-<a name="60"><span class="lineNum">      60 </span><span class="lineCov">          1 :     _popularMoviesState = RequestState.Loading;</span></a>
+<a name="60"><span class="lineNum">      60 </span><span class="lineCov">          1 :     _popularMoviesState = RequestState.loading;</span></a>
 <a name="61"><span class="lineNum">      61 </span><span class="lineCov">          1 :     notifyListeners();</span></a>
 <a name="62"><span class="lineNum">      62 </span>            : </a>
 <a name="63"><span class="lineNum">      63 </span><span class="lineCov">          2 :     final result = await getPopularMovies.execute();</span></a>
 <a name="64"><span class="lineNum">      64 </span><span class="lineCov">          1 :     result.fold(</span></a>
 <a name="65"><span class="lineNum">      65 </span><span class="lineCov">          1 :       (failure) {</span></a>
-<a name="66"><span class="lineNum">      66 </span><span class="lineCov">          1 :         _popularMoviesState = RequestState.Error;</span></a>
+<a name="66"><span class="lineNum">      66 </span><span class="lineCov">          1 :         _popularMoviesState = RequestState.error;</span></a>
 <a name="67"><span class="lineNum">      67 </span><span class="lineCov">          2 :         _message = failure.message;</span></a>
 <a name="68"><span class="lineNum">      68 </span><span class="lineCov">          1 :         notifyListeners();</span></a>
 <a name="69"><span class="lineNum">      69 </span>            :       },</a>
 <a name="70"><span class="lineNum">      70 </span><span class="lineCov">          1 :       (moviesData) {</span></a>
-<a name="71"><span class="lineNum">      71 </span><span class="lineCov">          1 :         _popularMoviesState = RequestState.Loaded;</span></a>
+<a name="71"><span class="lineNum">      71 </span><span class="lineCov">          1 :         _popularMoviesState = RequestState.loaded;</span></a>
 <a name="72"><span class="lineNum">      72 </span><span class="lineCov">          1 :         _popularMovies = moviesData;</span></a>
 <a name="73"><span class="lineNum">      73 </span><span class="lineCov">          1 :         notifyListeners();</span></a>
 <a name="74"><span class="lineNum">      74 </span>            :       },</a>
@@ -138,18 +138,18 @@
 <a name="76"><span class="lineNum">      76 </span>            :   }</a>
 <a name="77"><span class="lineNum">      77 </span>            : </a>
 <a name="78"><span class="lineNum">      78 </span><span class="lineCov">          1 :   Future&lt;void&gt; fetchTopRatedMovies() async {</span></a>
-<a name="79"><span class="lineNum">      79 </span><span class="lineCov">          1 :     _topRatedMoviesState = RequestState.Loading;</span></a>
+<a name="79"><span class="lineNum">      79 </span><span class="lineCov">          1 :     _topRatedMoviesState = RequestState.loading;</span></a>
 <a name="80"><span class="lineNum">      80 </span><span class="lineCov">          1 :     notifyListeners();</span></a>
 <a name="81"><span class="lineNum">      81 </span>            : </a>
 <a name="82"><span class="lineNum">      82 </span><span class="lineCov">          2 :     final result = await getTopRatedMovies.execute();</span></a>
 <a name="83"><span class="lineNum">      83 </span><span class="lineCov">          1 :     result.fold(</span></a>
 <a name="84"><span class="lineNum">      84 </span><span class="lineCov">          1 :       (failure) {</span></a>
-<a name="85"><span class="lineNum">      85 </span><span class="lineCov">          1 :         _topRatedMoviesState = RequestState.Error;</span></a>
+<a name="85"><span class="lineNum">      85 </span><span class="lineCov">          1 :         _topRatedMoviesState = RequestState.error;</span></a>
 <a name="86"><span class="lineNum">      86 </span><span class="lineCov">          2 :         _message = failure.message;</span></a>
 <a name="87"><span class="lineNum">      87 </span><span class="lineCov">          1 :         notifyListeners();</span></a>
 <a name="88"><span class="lineNum">      88 </span>            :       },</a>
 <a name="89"><span class="lineNum">      89 </span><span class="lineCov">          1 :       (moviesData) {</span></a>
-<a name="90"><span class="lineNum">      90 </span><span class="lineCov">          1 :         _topRatedMoviesState = RequestState.Loaded;</span></a>
+<a name="90"><span class="lineNum">      90 </span><span class="lineCov">          1 :         _topRatedMoviesState = RequestState.loaded;</span></a>
 <a name="91"><span class="lineNum">      91 </span><span class="lineCov">          1 :         _topRatedMovies = moviesData;</span></a>
 <a name="92"><span class="lineNum">      92 </span><span class="lineCov">          1 :         notifyListeners();</span></a>
 <a name="93"><span class="lineNum">      93 </span>            :       },</a>

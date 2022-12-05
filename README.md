@@ -62,3 +62,6 @@ flutter test --coverage
 
 build mock:
 flutter pub run build_runner build
+
+// Build status badge Codemagic:
+https://api.codemagic.io/apps/638da984cd8651bc6dad02c6/638da984cd8651bc6dad02c5/status_badge.svg

@@ -1,6 +1,7 @@
 import 'package:ditonton/data/datasources/db/database_helper.dart';
 import 'package:ditonton/data/datasources/movie_local_data_source.dart';
 import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
+import 'package:ditonton/data/datasources/ssl_pinning.dart';
 import 'package:ditonton/data/datasources/tv_series_local_data_source.dart';
 import 'package:ditonton/data/datasources/tv_series_remote_data_source.dart';
 import 'package:ditonton/data/repositories/movie_repository_impl.dart';
@@ -44,6 +45,7 @@ import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_tv_series_notifier.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
 
 final locator = GetIt.instance;
 
@@ -180,6 +182,8 @@ void init() {
   );
 
   // data sources
+  // locator.registerLazySingleton<MovieRemoteDataSource>(
+  //     () => MovieRemoteDataSourceImpl(client: locator()));
   locator.registerLazySingleton<MovieRemoteDataSource>(
       () => MovieRemoteDataSourceImpl(client: locator()));
   locator.registerLazySingleton<TvSeriesRemoteDataSource>(
@@ -195,4 +199,10 @@ void init() {
 
   // external
   locator.registerLazySingleton(() => http.Client());
+
+  locator.registerLazySingleton<IOClient>(() {
+    final ssl = SslPinning();
+    ssl.globalContext();
+    return ssl.ioClient;
+  });
 }

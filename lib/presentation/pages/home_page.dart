@@ -1,13 +1,14 @@
 import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/presentation/bloc/bottom_nav_bar_bloc.dart';
+import 'package:ditonton/presentation/bloc/bottom_nav_bar_event.dart';
+import 'package:ditonton/presentation/bloc/bottom_nav_bar_state.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/home_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_page.dart';
-import 'package:ditonton/presentation/provider/bottom_navigation_bar_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage();
@@ -17,14 +18,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-    Future.microtask(() =>
-        Provider.of<BottomNavigationBarNotifier>(context, listen: false)
-            .changeIndex(0));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,16 +66,15 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: Consumer<BottomNavigationBarNotifier>(
-        builder: (context, value, child) {
-          final RequestState state = value.requestState;
-          if (state == RequestState.loaded) {
-            if (value.index == 0) {
+      body: BlocBuilder<BottomNavBarBloc, BottomNavBarState>(
+        builder: (_, state) {
+          if (state is BottomNavBarData) {
+            if (state.navBarIndex == 0) {
               return HomeMoviePage();
             } else {
               return HomeTvSeriesPage();
             }
-          } else if (state == RequestState.loading) {
+          } else if (state is BottomNavBarLoading) {
             return Center(
               child: CircularProgressIndicator(),
             );
@@ -93,8 +85,8 @@ class _HomePageState extends State<HomePage> {
           }
         },
       ),
-      bottomNavigationBar: Consumer<BottomNavigationBarNotifier>(
-        builder: (context, data, _) {
+      bottomNavigationBar: BlocBuilder<BottomNavBarBloc, BottomNavBarState>(
+        builder: (_, state) {
           return BottomNavigationBar(
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
@@ -107,8 +99,10 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
             selectedItemColor: kMikadoYellow,
-            currentIndex: data.index,
-            onTap: (value) => data.changeIndex(value),
+            currentIndex: (state is BottomNavBarData) ? state.navBarIndex : 0,
+            onTap: (value) {
+              context.read<BottomNavBarBloc>().add(OnClick(value));
+            },
           );
         },
       ),

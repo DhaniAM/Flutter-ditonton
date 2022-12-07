@@ -28,8 +28,8 @@ import 'package:ditonton/domain/usecases/save_movie_watchlist.dart';
 import 'package:ditonton/domain/usecases/save_tv_series_watchlist.dart';
 import 'package:ditonton/domain/usecases/search_movies.dart';
 import 'package:ditonton/domain/usecases/search_tv_series.dart';
+import 'package:ditonton/presentation/bloc/bottom_nav_bar_bloc.dart';
 import 'package:ditonton/presentation/bloc/search_bloc.dart';
-import 'package:ditonton/presentation/provider/bottom_navigation_bar_provider.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/now_playing_movies_notifier.dart';
@@ -56,8 +56,9 @@ void init() {
     () => SearchTvSeriesBloc(locator()),
   );
 
+  locator.registerFactory(() => BottomNavBarBloc());
+
   // provider
-  locator.registerFactory(() => BottomNavigationBarNotifier());
   locator.registerFactory(
     () => MovieListNotifier(
       getNowPlayingMovies: locator(),

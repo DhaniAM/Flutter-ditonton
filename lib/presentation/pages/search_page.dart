@@ -1,11 +1,12 @@
 import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/tv_series.dart';
-import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_series_search_notifier.dart';
+import 'package:ditonton/presentation/bloc/search_bloc.dart';
+import 'package:ditonton/presentation/bloc/search_event.dart';
+import 'package:ditonton/presentation/bloc/search_state.dart';
 import 'package:ditonton/presentation/widgets/search_result_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class SearchPage extends StatelessWidget {
@@ -23,11 +24,9 @@ class SearchPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              onSubmitted: (query) {
-                Provider.of<MovieSearchNotifier>(context, listen: false)
-                  ..fetchMovieSearch(query);
-                Provider.of<TvSeriesSearchNotifier>(context, listen: false)
-                  ..fetchTvSeriesSearch(query);
+              onChanged: (query) {
+                context.read<SearchMovieBloc>().add(OnQueryChanged(query));
+                context.read<SearchTvSeriesBloc>().add(OnQueryChanged(query));
               },
               decoration: InputDecoration(
                 hintText: 'Search title',
@@ -41,30 +40,40 @@ class SearchPage extends StatelessWidget {
               'Search Result',
               style: kHeading6,
             ),
-            Consumer2<MovieSearchNotifier, TvSeriesSearchNotifier>(
-              builder: (context, movieData, tvSeriesData, child) {
-                if (movieData.state == RequestState.loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (movieData.state == RequestState.loaded) {
-                  List results = mergeResults(
-                      movieData.searchResult, tvSeriesData.searchResult);
+            BlocBuilder<SearchMovieBloc, SearchState>(
+              builder: (_, movieState) {
+                return BlocBuilder<SearchTvSeriesBloc, SearchState>(
+                    builder: (_, tvSeriesState) {
+                  if (movieState is SearchLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (movieState is SearchHasData &&
+                      tvSeriesState is SearchHasData) {
+                    final List<Movie> movie = movieState.result as List<Movie>;
+                    final List<TvSeries> tvSeries =
+                        tvSeriesState.result as List<TvSeries>;
+                    List results = mergeResults(movie, tvSeries);
 
-                  return Expanded(
-                    child: ListView.builder(
-                      padding: const EdgeInsets.all(8),
-                      itemBuilder: (context, index) {
-                        return SearchResultList(results[index]);
-                      },
-                      itemCount: results.length,
-                    ),
-                  );
-                } else {
-                  return Expanded(
-                    child: Center(),
-                  );
-                }
+                    return Expanded(
+                      child: ListView.builder(
+                        padding: const EdgeInsets.all(8),
+                        itemBuilder: (context, index) {
+                          return SearchResultList(results[index]);
+                        },
+                        itemCount: results.length,
+                      ),
+                    );
+                  } else if (movieState is SearchError) {
+                    return Expanded(
+                      child: Center(
+                        child: Text(movieState.message),
+                      ),
+                    );
+                  } else {
+                    return Center();
+                  }
+                });
               },
             ),
           ],

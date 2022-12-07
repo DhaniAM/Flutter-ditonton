@@ -1,4 +1,3 @@
-import 'package:ditonton/domain/entities/movie.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class SearchState extends Equatable {
@@ -14,7 +13,6 @@ class SearchLoading extends SearchState {}
 
 class SearchError extends SearchState {
   final String message;
-
   SearchError(this.message);
 
   @override
@@ -22,8 +20,7 @@ class SearchError extends SearchState {
 }
 
 class SearchHasData extends SearchState {
-  final List<Movie> result;
-
+  final List result;
   SearchHasData(this.result);
 
   @override

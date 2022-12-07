@@ -1,24 +1,47 @@
 import 'package:bloc/bloc.dart';
 import 'package:ditonton/domain/usecases/search_movies.dart';
+import 'package:ditonton/domain/usecases/search_tv_series.dart';
 import 'package:ditonton/presentation/bloc/search_event.dart';
 import 'package:ditonton/presentation/bloc/search_state.dart';
 
-class SearchBloc extends Bloc<SearchEvent, SearchState> {
+class SearchMovieBloc extends Bloc<SearchEvent, SearchState> {
   final SearchMovies _searchMovies;
 
-  SearchBloc(this._searchMovies) : super(SearchEmpty()) {
+  SearchMovieBloc(this._searchMovies) : super(SearchEmpty()) {
     on<OnQueryChanged>((event, emit) async {
       final query = event.query;
 
       emit(SearchLoading());
-      final result = await _searchMovies.execute(query);
+      final movieResult = await _searchMovies.execute(query);
 
-      result.fold(
+      movieResult.fold(
         (failure) {
           emit(SearchError(failure.message));
         },
-        (data) {
-          emit(SearchHasData(data));
+        (movieData) {
+          emit(SearchHasData(movieData));
+        },
+      );
+    });
+  }
+}
+
+class SearchTvSeriesBloc extends Bloc<SearchEvent, SearchState> {
+  final SearchTvSeries _searchTvSeries;
+
+  SearchTvSeriesBloc(this._searchTvSeries) : super(SearchEmpty()) {
+    on<OnQueryChanged>((event, emit) async {
+      final query = event.query;
+
+      emit(SearchLoading());
+      final tvSeriesResult = await _searchTvSeries.execute(query);
+
+      tvSeriesResult.fold(
+        (failure) {
+          emit(SearchError(failure.message));
+        },
+        (tvSeriesData) {
+          emit(SearchHasData(tvSeriesData));
         },
       );
     });

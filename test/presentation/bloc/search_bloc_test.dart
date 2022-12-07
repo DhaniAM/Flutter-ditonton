@@ -2,7 +2,9 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/domain/entities/tv_series.dart';
 import 'package:ditonton/domain/usecases/search_movies.dart';
+import 'package:ditonton/domain/usecases/search_tv_series.dart';
 import 'package:ditonton/presentation/bloc/search_bloc.dart';
 import 'package:ditonton/presentation/bloc/search_event.dart';
 import 'package:ditonton/presentation/bloc/search_state.dart';
@@ -10,74 +12,100 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../provider/movie_search_notifier_test.mocks.dart';
+import '../../dummy_data/dummy_objects.dart';
+import 'search_bloc_test.mocks.dart';
 
-@GenerateMocks([SearchMovies])
+@GenerateMocks([SearchMovies, SearchTvSeries])
 void main() {
-  late SearchBloc searchBloc;
+  late SearchMovieBloc searchMovieBloc;
+  late SearchTvSeriesBloc searchTvSeriesBloc;
   late MockSearchMovies mockSearchMovies;
+  late MockSearchTvSeries mockSearchTvSeries;
 
   setUp(() {
     mockSearchMovies = MockSearchMovies();
-    searchBloc = SearchBloc(mockSearchMovies);
+    mockSearchTvSeries = MockSearchTvSeries();
+    searchMovieBloc = SearchMovieBloc(mockSearchMovies);
+    searchTvSeriesBloc = SearchTvSeriesBloc(mockSearchTvSeries);
   });
 
   test('initial state should be empty', () {
-    expect(searchBloc.state, SearchEmpty());
+    expect(searchMovieBloc.state, SearchEmpty());
+    expect(searchTvSeriesBloc.state, SearchEmpty());
   });
 
-  final tMovieModel = Movie(
-    adult: false,
-    backdropPath: '/muth4OYamXf41G2evdrLEg8d3om.jpg',
-    genreIds: [14, 28],
-    id: 557,
-    originalTitle: 'Spider-Man',
-    overview:
-        'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
-    popularity: 60.441,
-    posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
-    releaseDate: '2002-05-01',
-    title: 'Spider-Man',
-    video: false,
-    voteAverage: 7.2,
-    voteCount: 13507,
-    type: 'movie',
-  );
-  final tMovieList = <Movie>[tMovieModel];
-  final tQuery = 'spiderman';
+  final tMovieList = <Movie>[testMovie];
+  final tTvSeriesList = <TvSeries>[testTvSeries];
+  final movieQuery = 'spiderman';
+  final tvQuery = 'title';
 
-  blocTest<SearchBloc, SearchState>(
-    'Should emit [Loading, HasData] when data is gotten successfully',
+  blocTest<SearchMovieBloc, SearchState>(
+    'Should emit [Loading, HasData] when Movie data is gotten successfully',
     build: () {
-      when(mockSearchMovies.execute(tQuery))
+      when(mockSearchMovies.execute(movieQuery))
           .thenAnswer((_) async => Right(tMovieList));
-      return searchBloc;
+      return searchMovieBloc;
     },
-    act: (bloc) => bloc.add(OnQueryChanged(tQuery)),
+    act: (bloc) => bloc.add(OnQueryChanged(movieQuery)),
     wait: const Duration(milliseconds: 100),
     expect: () => [
       SearchLoading(),
       SearchHasData(tMovieList),
     ],
     verify: (bloc) {
-      verify(mockSearchMovies.execute(tQuery));
+      verify(mockSearchMovies.execute(movieQuery));
     },
   );
 
-  blocTest<SearchBloc, SearchState>(
-    'Should emit [Loading, Error] when get search is unsuccessful',
+  blocTest<SearchTvSeriesBloc, SearchState>(
+    'Should emit [Loading, HasData] when Tv Series data is gotten successfully',
     build: () {
-      when(mockSearchMovies.execute(tQuery))
-          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
-      return searchBloc;
+      when(mockSearchTvSeries.execute(tvQuery))
+          .thenAnswer((_) async => Right(tTvSeriesList));
+      return searchTvSeriesBloc;
     },
-    act: (bloc) => bloc.add(OnQueryChanged(tQuery)),
+    act: (bloc) => bloc.add(OnQueryChanged(tvQuery)),
+    wait: const Duration(milliseconds: 100),
+    expect: () => [
+      SearchLoading(),
+      SearchHasData(tTvSeriesList),
+    ],
+    verify: (bloc) {
+      verify(mockSearchTvSeries.execute(tvQuery));
+    },
+  );
+
+  blocTest<SearchMovieBloc, SearchState>(
+    'Should emit [Loading, Error] when get movie search is unsuccessful',
+    build: () {
+      when(mockSearchMovies.execute(movieQuery))
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+      return searchMovieBloc;
+    },
+    act: (bloc) => bloc.add(OnQueryChanged(movieQuery)),
     expect: () => [
       SearchLoading(),
       SearchError('Server Failure'),
     ],
     verify: (bloc) {
-      verify(mockSearchMovies.execute(tQuery));
+      verify(mockSearchMovies.execute(movieQuery));
+    },
+  );
+
+  blocTest<SearchTvSeriesBloc, SearchState>(
+    'Should emit [Loading, Error] when get tv series search is unsuccessful',
+    build: () {
+      when(mockSearchTvSeries.execute(tvQuery))
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+      return searchTvSeriesBloc;
+    },
+    act: (bloc) => bloc.add(OnQueryChanged(tvQuery)),
+    expect: () => [
+      SearchLoading(),
+      SearchError('Server Failure'),
+    ],
+    verify: (bloc) {
+      verify(mockSearchTvSeries.execute(tvQuery));
     },
   );
 }

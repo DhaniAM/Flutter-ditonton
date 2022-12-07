@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-11-30 21:18:32</td>
+            <td class="headerValue">2022-12-07 14:14:09</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -66,7 +66,7 @@
 <a name="4"><span class="lineNum">       4 </span>            : import 'package:ditonton/data/models/movie_detail_model.dart';</a>
 <a name="5"><span class="lineNum">       5 </span>            : import 'package:ditonton/data/models/movie_model.dart';</a>
 <a name="6"><span class="lineNum">       6 </span>            : import 'package:ditonton/data/models/movie_response.dart';</a>
-<a name="7"><span class="lineNum">       7 </span>            : import 'package:http/http.dart' as http;</a>
+<a name="7"><span class="lineNum">       7 </span>            : import 'package:http/io_client.dart';</a>
 <a name="8"><span class="lineNum">       8 </span>            : </a>
 <a name="9"><span class="lineNum">       9 </span>            : abstract class MovieRemoteDataSource {</a>
 <a name="10"><span class="lineNum">      10 </span>            :   Future&lt;List&lt;MovieModel&gt;&gt; getNowPlayingMovies();</a>
@@ -82,7 +82,7 @@
 <a name="20"><span class="lineNum">      20 </span>            :   static const API_KEY = 'api_key=2174d146bb9c0eab47529b2e77d6b526';</a>
 <a name="21"><span class="lineNum">      21 </span>            :   static const BASE_URL = 'https://api.themoviedb.org/3';</a>
 <a name="22"><span class="lineNum">      22 </span>            : </a>
-<a name="23"><span class="lineNum">      23 </span>            :   final http.Client client;</a>
+<a name="23"><span class="lineNum">      23 </span>            :   final IOClient client;</a>
 <a name="24"><span class="lineNum">      24 </span>            : </a>
 <a name="25"><span class="lineNum">      25 </span><span class="lineCov">          1 :   MovieRemoteDataSourceImpl({required this.client});</span></a>
 <a name="26"><span class="lineNum">      26 </span>            : </a>

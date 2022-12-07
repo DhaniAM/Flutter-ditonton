@@ -92,7 +92,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => di.locator<SearchTvSeriesBloc>()),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Ditonton',
         theme: ThemeData.dark().copyWith(
           colorScheme: kColorScheme,
           primaryColor: kRichBlack,

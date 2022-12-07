@@ -16,16 +16,12 @@ void main() {
   late Database mockDatabase;
 
   const String _tblWatchlist = 'watchlist';
-  const tId = 25;
-
-  List<Map<String, dynamic>> tListMovies = [testMovieMap];
-  List<Map<String, dynamic>> tListTvSeries = [testTvSeriesMap];
 
   setUpAll(() async {
     mockDatabaseHelper = MockDatabaseHelper();
     databaseHelper = DatabaseHelper();
     mockDatabase = await databaseFactoryFfi.openDatabase(inMemoryDatabasePath);
-    await mockDatabase.execute('''
+    mockDatabase.execute('''
       CREATE TABLE  $_tblWatchlist (
         id INTEGER PRIMARY KEY,
         title TEXT,
@@ -110,9 +106,6 @@ void main() {
     });
 
     test('should return list of tv series from db', () async {
-      // arrange
-      when(mockDatabaseHelper.getTvSeriesWatchlist())
-          .thenAnswer((_) async => tListTvSeries);
       // act
       final result = await databaseHelper.getTvSeriesWatchlist();
       // assert

@@ -40,11 +40,13 @@ dependencies:
   path_provider: ^2.0.2
   firebase_core: ^2.3.0
   firebase_crashlytics: ^3.0.6
+  flutter_bloc: ^8.1.1
 
 dev_dependencies:
   mockito: ^5.0.8
   build_runner: ^2.0.4
   sqflite_common_ffi: ^2.2.0+1
+  bloc_test: ^9.1.0
   flutter_test:
     sdk: flutter
 

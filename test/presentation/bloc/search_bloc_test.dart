@@ -53,9 +53,7 @@ void main() {
       SearchHasData(tMovieList),
     ],
     verify: (bloc) {
-      verify(
-        mockSearchMovies.execute(movieQuery),
-      );
+      verify(mockSearchMovies.execute(movieQuery));
     },
   );
 

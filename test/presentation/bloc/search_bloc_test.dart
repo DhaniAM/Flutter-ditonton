@@ -47,7 +47,7 @@ void main() {
       return searchMovieBloc;
     },
     act: (bloc) => bloc.add(OnQueryChanged(movieQuery)),
-    wait: const Duration(milliseconds: 100),
+    wait: const Duration(milliseconds: 1000),
     expect: () => [
       SearchLoading(),
       SearchHasData(tMovieList),
@@ -65,7 +65,7 @@ void main() {
       return searchTvSeriesBloc;
     },
     act: (bloc) => bloc.add(OnQueryChanged(tvQuery)),
-    wait: const Duration(milliseconds: 100),
+    wait: const Duration(milliseconds: 1000),
     expect: () => [
       SearchLoading(),
       SearchHasData(tTvSeriesList),
@@ -83,6 +83,7 @@ void main() {
       return searchMovieBloc;
     },
     act: (bloc) => bloc.add(OnQueryChanged(movieQuery)),
+    wait: const Duration(milliseconds: 1000),
     expect: () => [
       SearchLoading(),
       SearchError('Server Failure'),
@@ -100,6 +101,7 @@ void main() {
       return searchTvSeriesBloc;
     },
     act: (bloc) => bloc.add(OnQueryChanged(tvQuery)),
+    wait: const Duration(milliseconds: 1000),
     expect: () => [
       SearchLoading(),
       SearchError('Server Failure'),

@@ -14,6 +14,10 @@ class DatabaseHelper {
 
   static Database? _database;
 
+  set setTestDatabase(Database db) {
+    _database = db;
+  }
+
   static const String _tblWatchlist = 'watchlist';
 
   /// Init db when db is null

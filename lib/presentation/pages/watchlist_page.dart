@@ -57,13 +57,29 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
                 child: CircularProgressIndicator(),
               );
             } else if (movieData.watchlistState == RequestState.loaded) {
-              return ListView.builder(
-                itemBuilder: (_, index) {
-                  final content = result[index];
-                  return ContentCardList(content);
-                },
-                itemCount: result.length,
-              );
+              if (result.length != 0) {
+                return ListView.builder(
+                  itemBuilder: (_, index) {
+                    final content = result[index];
+                    return ContentCardList(content);
+                  },
+                  itemCount: result.length,
+                );
+              } else {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const <Widget>[
+                      Icon(
+                        Icons.credit_card_off_sharp,
+                        size: 150,
+                        color: Color(0x34CECECE),
+                      ),
+                      Text('No Watchlist'),
+                    ],
+                  ),
+                );
+              }
             } else {
               return Center(
                 key: Key('error_message'),

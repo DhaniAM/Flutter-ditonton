@@ -55,13 +55,27 @@ class SearchPage extends StatelessWidget {
                     List results = mergeResults(movie, tvSeries);
 
                     return Expanded(
-                      child: ListView.builder(
-                        padding: const EdgeInsets.all(8),
-                        itemBuilder: (context, index) {
-                          return SearchResultList(results[index]);
-                        },
-                        itemCount: results.length,
-                      ),
+                      child: (results.length != 0)
+                          ? ListView.builder(
+                              padding: const EdgeInsets.all(8),
+                              itemBuilder: (context, index) {
+                                return SearchResultList(results[index]);
+                              },
+                              itemCount: results.length,
+                            )
+                          : Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const <Widget>[
+                                  Icon(
+                                    Icons.credit_card_off_sharp,
+                                    size: 150,
+                                    color: Color(0x34CECECE),
+                                  ),
+                                  Text('No result'),
+                                ],
+                              ),
+                            ),
                     );
                   } else if (movieState is SearchError) {
                     return Expanded(

@@ -7,10 +7,7 @@ abstract class BottomNavBarState extends Equatable {
   List<Object> get props => [];
 }
 
-class BottomNavBarLoading extends BottomNavBarState {
-  @override
-  List<Object> get props => [];
-}
+class BottomNavBarLoading extends BottomNavBarState {}
 
 class BottomNavBarError extends BottomNavBarState {}
 

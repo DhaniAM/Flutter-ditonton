@@ -88,11 +88,11 @@ class SearchPage extends StatelessWidget {
     int longest = (tvSeriesLength > movieLength) ? tvSeriesLength : movieLength;
 
     for (int i = 0; i < longest; i++) {
-      if (i < tvSeriesLength) {
-        results.add(tvSeries[i]);
-      }
       if (i < movieLength) {
         results.add(movie[i]);
+      }
+      if (i < tvSeriesLength) {
+        results.add(tvSeries[i]);
       }
     }
 

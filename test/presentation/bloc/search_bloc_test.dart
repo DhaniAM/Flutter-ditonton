@@ -52,6 +52,8 @@ void main() {
       SearchLoading(),
       SearchHasData(tMovieList),
     ],
+
+    /// verify used to confirm whether the method is called or not
     verify: (bloc) {
       verify(mockSearchMovies.execute(movieQuery));
     },

@@ -6,6 +6,7 @@ import 'package:ditonton/presentation/bloc/bottom_nav_bar_bloc.dart';
 import 'package:ditonton/presentation/bloc/movie/movie_detail_bloc.dart';
 import 'package:ditonton/presentation/bloc/search_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv_series/tv_series_detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_series/tv_series_list_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist_button_bloc.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_page.dart';
@@ -33,7 +34,6 @@ import 'package:provider/provider.dart';
 import 'presentation/bloc/movie/movie_list_bloc.dart';
 import 'presentation/provider/popular_tv_series_notifier.dart';
 import 'presentation/provider/top_rated_tv_series_notifier.dart';
-import 'presentation/provider/tv_series_list_notifier.dart';
 import 'presentation/provider/watchlist_tv_series_notifier.dart';
 
 void main() async {
@@ -65,8 +65,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => di.locator<MovieListBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSeriesListNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TvSeriesListBloc>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<NowPlayingMoviesNotifier>(),

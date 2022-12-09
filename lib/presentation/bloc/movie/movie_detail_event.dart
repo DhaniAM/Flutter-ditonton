@@ -18,8 +18,3 @@ class OnRemoveFromWatchlist extends MovieDetailEvent {
   final MovieDetail movieDetail;
   OnRemoveFromWatchlist(this.movieDetail);
 }
-
-class OnLoadWatchlistStatus extends MovieDetailEvent {
-  final int movieId;
-  OnLoadWatchlistStatus(this.movieId);
-}

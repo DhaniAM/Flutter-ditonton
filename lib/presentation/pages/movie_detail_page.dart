@@ -1,13 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
+import 'package:ditonton/presentation/bloc/movie/movie_detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/movie_detail_event.dart';
+import 'package:ditonton/presentation/bloc/movie/movie_detail_state.dart';
+import 'package:ditonton/presentation/bloc/watchlist_button_bloc.dart';
+import 'package:ditonton/presentation/bloc/watchlist_button_event.dart';
+import 'package:ditonton/presentation/bloc/watchlist_button_state.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:provider/provider.dart';
 
 class MovieDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/movie-detail';
@@ -24,34 +29,44 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() {
-      Provider.of<MovieDetailNotifier>(context, listen: false)
-          .fetchMovieDetail(widget.id);
-      Provider.of<MovieDetailNotifier>(context, listen: false)
-          .loadWatchlistStatus(widget.id);
-    });
+    context.read<MovieDetailBloc>().add(OnFetchMovieDetail(widget.id));
+    context.read<WatchlistButtonBloc>().add(OnFetchWatchlistStatus(widget.id));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<MovieDetailNotifier>(
-        builder: (context, provider, child) {
-          if (provider.movieState == RequestState.loading) {
+      body: BlocBuilder<MovieDetailBloc, MovieDetailState>(
+        builder: (_, movieState) {
+          /// When init or loading
+          if (movieState is MovieDetailLoading) {
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if (provider.movieState == RequestState.loaded) {
-            final movie = provider.movie;
+
+            /// When has data
+          } else if (movieState is MovieDetailHasData) {
             return SafeArea(
-              child: DetailContent(
-                movie,
-                provider.movieRecommendations,
-                provider.isAddedToWatchlist,
+              child: Center(
+                child: DetailContent(
+                  movieState.movieDetail,
+                  movieState.movieRecommendation,
+                  // watchlistState.isInWatchlist,
+                ),
               ),
             );
+
+            /// When error
+          } else if (movieState is MovieDetailError) {
+            return Center(child: Text(movieState.message));
           } else {
-            return Center(child: Text(provider.message));
+            return Center(
+              child: Icon(
+                Icons.credit_card_off_sharp,
+                size: 150,
+                color: Color(0x34CECECE),
+              ),
+            );
           }
         },
       ),
@@ -62,9 +77,13 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 class DetailContent extends StatelessWidget {
   final MovieDetail movie;
   final List<Movie> recommendations;
-  final bool isAddedWatchlist;
+  // final bool isAddedWatchlist;
 
-  DetailContent(this.movie, this.recommendations, this.isAddedWatchlist);
+  DetailContent(
+    this.movie,
+    this.recommendations,
+    // this.isAddedWatchlist,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -106,52 +125,71 @@ class DetailContent extends StatelessWidget {
                               movie.title,
                               style: kHeading5,
                             ),
-                            ElevatedButton(
-                              onPressed: () async {
-                                if (!isAddedWatchlist) {
-                                  await Provider.of<MovieDetailNotifier>(
-                                          context,
-                                          listen: false)
-                                      .addWatchlist(movie);
-                                } else {
-                                  await Provider.of<MovieDetailNotifier>(
-                                          context,
-                                          listen: false)
-                                      .removeFromWatchlist(movie);
-                                }
+                            BlocBuilder<WatchlistButtonBloc,
+                                WatchlistButtonState>(
+                              builder: (_, watchlistState) {
+                                if (watchlistState is WatchlistButtonHasData) {
+                                  return ElevatedButton(
+                                    onPressed: () {
+                                      /// When true or in watchlist
+                                      if (watchlistState.isInWatchlist) {
+                                        context
+                                            .read<WatchlistButtonBloc>()
+                                            .add(OnRemoveWatchlist(movie));
 
-                                final message =
-                                    Provider.of<MovieDetailNotifier>(context,
-                                            listen: false)
-                                        .watchlistMessage;
+                                        /// When false or NOT in watchlist
+                                      } else {
+                                        context
+                                            .read<WatchlistButtonBloc>()
+                                            .add(OnAddWatchlist(movie));
+                                      }
 
-                                if (message ==
-                                        MovieDetailNotifier
-                                            .watchlistAddSuccessMessage ||
-                                    message ==
-                                        MovieDetailNotifier
-                                            .watchlistRemoveSuccessMessage) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text(message)));
-                                } else {
+                                      /// Showing dialog information
+                                      /// if True or in watchlist
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        duration: Duration(milliseconds: 500),
+                                        content: (watchlistState.isInWatchlist)
+                                            ? Text('removed from watchlist')
+                                            : Text('added to watchlist'),
+                                      ));
+                                    },
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        (watchlistState.isInWatchlist)
+                                            ? Icon(Icons.check)
+                                            : Icon(Icons.add),
+                                        Text('Watchlist'),
+                                      ],
+                                    ),
+                                  );
+
+                                  /// when error
+                                } else if (watchlistState
+                                    is WatchlistButtonError) {
                                   showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          content: Text(message),
-                                        );
-                                      });
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        content: Text(watchlistState.message),
+                                      );
+                                    },
+                                  );
+
+                                  /// when loading
                                 }
+                                return ElevatedButton(
+                                  onPressed: () {},
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(Icons.circle_outlined),
+                                      Text('Watchlist'),
+                                    ],
+                                  ),
+                                );
                               },
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  isAddedWatchlist
-                                      ? Icon(Icons.check)
-                                      : Icon(Icons.add),
-                                  Text('Watchlist'),
-                                ],
-                              ),
                             ),
                             Text(
                               _showGenres(movie.genres),
@@ -186,18 +224,15 @@ class DetailContent extends StatelessWidget {
                               'Recommendations',
                               style: kHeading6,
                             ),
-                            Consumer<MovieDetailNotifier>(
-                              builder: (context, data, child) {
-                                if (data.recommendationState ==
-                                    RequestState.loading) {
+                            BlocBuilder<MovieDetailBloc, MovieDetailState>(
+                              builder: (_, data) {
+                                if (data is MovieDetailLoading) {
                                   return Center(
                                     child: CircularProgressIndicator(),
                                   );
-                                } else if (data.recommendationState ==
-                                    RequestState.error) {
+                                } else if (data is MovieDetailError) {
                                   return Text(data.message);
-                                } else if (data.recommendationState ==
-                                    RequestState.loaded) {
+                                } else if (data is MovieDetailHasData) {
                                   return Container(
                                     height: 150,
                                     child: ListView.builder(

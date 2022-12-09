@@ -29,8 +29,9 @@ import 'package:ditonton/domain/usecases/save_tv_series_watchlist.dart';
 import 'package:ditonton/domain/usecases/search_movies.dart';
 import 'package:ditonton/domain/usecases/search_tv_series.dart';
 import 'package:ditonton/presentation/bloc/bottom_nav_bar_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/movie_detail_bloc.dart';
 import 'package:ditonton/presentation/bloc/search_bloc.dart';
-import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
+import 'package:ditonton/presentation/bloc/watchlist_button_bloc.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/now_playing_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/now_playing_tv_series_notifier.dart';
@@ -49,14 +50,31 @@ final locator = GetIt.instance;
 
 void init() {
   // bloc
+  locator.registerFactory(() => BottomNavBarBloc());
+
   locator.registerFactory(
     () => SearchMovieBloc(locator()),
   );
+
   locator.registerFactory(
     () => SearchTvSeriesBloc(locator()),
   );
 
-  locator.registerFactory(() => BottomNavBarBloc());
+  locator.registerFactory(
+    () => WatchlistButtonBloc(
+      removeMovieWatchlist: locator(),
+      saveMovieWatchlist: locator(),
+      getMovieWatchListStatus: locator(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => MovieDetailBloc(
+      getMovieDetail: locator(),
+      getMovieRecommendations: locator(),
+      getMovieWatchListStatus: locator(),
+    ),
+  );
 
   // provider
   locator.registerFactory(
@@ -73,15 +91,7 @@ void init() {
       getTopRatedTvSeries: locator(),
     ),
   );
-  locator.registerFactory(
-    () => MovieDetailNotifier(
-      getMovieDetail: locator(),
-      getMovieRecommendations: locator(),
-      getMovieWatchListStatus: locator(),
-      saveMovieWatchlist: locator(),
-      removeMovieWatchlist: locator(),
-    ),
-  );
+
   locator.registerFactory(
     () => TvSeriesDetailNotifier(
       getTvSeriesDetail: locator(),

@@ -9,7 +9,6 @@ import 'package:ditonton/presentation/bloc/movie/movie_detail_state.dart';
 import 'package:ditonton/presentation/bloc/watchlist_button_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist_button_event.dart';
 import 'package:ditonton/presentation/bloc/watchlist_button_state.dart';
-import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -30,7 +29,9 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   void initState() {
     super.initState();
     context.read<MovieDetailBloc>().add(OnFetchMovieDetail(widget.id));
-    context.read<WatchlistButtonBloc>().add(OnFetchWatchlistStatus(widget.id));
+    context
+        .read<WatchlistButtonBloc>()
+        .add(OnFetchMovieWatchlistStatus(widget.id));
   }
 
   @override
@@ -77,12 +78,10 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 class DetailContent extends StatelessWidget {
   final MovieDetail movie;
   final List<Movie> recommendations;
-  // final bool isAddedWatchlist;
 
   DetailContent(
     this.movie,
     this.recommendations,
-    // this.isAddedWatchlist,
   );
 
   @override
@@ -135,13 +134,13 @@ class DetailContent extends StatelessWidget {
                                       if (watchlistState.isInWatchlist) {
                                         context
                                             .read<WatchlistButtonBloc>()
-                                            .add(OnRemoveWatchlist(movie));
+                                            .add(OnRemoveMovieWatchlist(movie));
 
                                         /// When false or NOT in watchlist
                                       } else {
                                         context
                                             .read<WatchlistButtonBloc>()
-                                            .add(OnAddWatchlist(movie));
+                                            .add(OnAddMovieWatchlist(movie));
                                       }
 
                                       /// Showing dialog information
@@ -176,9 +175,9 @@ class DetailContent extends StatelessWidget {
                                       );
                                     },
                                   );
-
-                                  /// when loading
                                 }
+
+                                /// when loading
                                 return ElevatedButton(
                                   onPressed: () {},
                                   child: Row(

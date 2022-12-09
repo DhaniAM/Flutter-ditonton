@@ -1,20 +1,39 @@
 import 'package:ditonton/domain/entities/movie_detail.dart';
+import 'package:ditonton/domain/entities/tv_series_detail.dart';
 
 abstract class WatchlistButtonEvent {
   const WatchlistButtonEvent();
 }
 
-class OnAddWatchlist extends WatchlistButtonEvent {
+/// Movie
+class OnAddMovieWatchlist extends WatchlistButtonEvent {
   final MovieDetail movieDetail;
-  OnAddWatchlist(this.movieDetail);
+  OnAddMovieWatchlist(this.movieDetail);
 }
 
-class OnRemoveWatchlist extends WatchlistButtonEvent {
+class OnRemoveMovieWatchlist extends WatchlistButtonEvent {
   final MovieDetail movieDetail;
-  OnRemoveWatchlist(this.movieDetail);
+  OnRemoveMovieWatchlist(this.movieDetail);
 }
 
-class OnFetchWatchlistStatus extends WatchlistButtonEvent {
+class OnFetchMovieWatchlistStatus extends WatchlistButtonEvent {
   final int movieId;
-  OnFetchWatchlistStatus(this.movieId);
+  OnFetchMovieWatchlistStatus(this.movieId);
+}
+
+/// Tv series
+
+class OnAddTvSeriesWatchlist extends WatchlistButtonEvent {
+  final TvSeriesDetail tvSeriesDetail;
+  OnAddTvSeriesWatchlist(this.tvSeriesDetail);
+}
+
+class OnRemoveTvSeriesWatchlist extends WatchlistButtonEvent {
+  final TvSeriesDetail tvSeriesDetail;
+  OnRemoveTvSeriesWatchlist(this.tvSeriesDetail);
+}
+
+class OnFetchTvSeriesWatchlistStatus extends WatchlistButtonEvent {
+  final int tvSeriesId;
+  OnFetchTvSeriesWatchlistStatus(this.tvSeriesId);
 }

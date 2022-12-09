@@ -10,7 +10,6 @@ import 'package:ditonton/presentation/bloc/tv_series/tv_series_detail_state.dart
 import 'package:ditonton/presentation/bloc/watchlist_button_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist_button_event.dart';
 import 'package:ditonton/presentation/bloc/watchlist_button_state.dart';
-import 'package:ditonton/presentation/provider/tv_series_detail_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';

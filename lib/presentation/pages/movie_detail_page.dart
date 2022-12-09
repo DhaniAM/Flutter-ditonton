@@ -184,7 +184,7 @@ class DetailContent extends StatelessWidget {
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Icon(Icons.circle_outlined),
+                                      Icon(Icons.add),
                                       Text('Watchlist'),
                                     ],
                                   ),

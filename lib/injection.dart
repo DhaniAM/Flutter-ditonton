@@ -33,7 +33,6 @@ import 'package:ditonton/presentation/bloc/movie/movie_detail_bloc.dart';
 import 'package:ditonton/presentation/bloc/search_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv_series/tv_series_detail_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist_button_bloc.dart';
-import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/now_playing_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/now_playing_tv_series_notifier.dart';
 import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
@@ -45,6 +44,8 @@ import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_tv_series_notifier.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/io_client.dart';
+
+import 'presentation/bloc/movie/movie_list_bloc.dart';
 
 final locator = GetIt.instance;
 
@@ -87,14 +88,15 @@ void init() {
     ),
   );
 
-  // provider
   locator.registerFactory(
-    () => MovieListNotifier(
+    () => MovieListBloc(
       getNowPlayingMovies: locator(),
       getPopularMovies: locator(),
       getTopRatedMovies: locator(),
     ),
   );
+
+  // provider
   locator.registerFactory(
     () => TvSeriesListNotifier(
       getNowPlayingTvSeries: locator(),

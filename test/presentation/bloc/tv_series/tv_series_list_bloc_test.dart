@@ -62,14 +62,58 @@ void main() {
   );
 
   blocTest<TvSeriesListBloc, TvSeriesListState>(
-    'Should emit [Loading, Error] when TvSeries data is failed ',
+    'Should emit [Loading, Error] when TvSeries now playing data is failed ',
+    build: () {
+      when(mockGetTopRatedTvSeries.execute())
+          .thenAnswer((_) async => Right(testTvSeriesList));
+      when(mockGetPopularTvSeries.execute())
+          .thenAnswer((_) async => Right(testTvSeriesList));
+      when(mockGetNowPlayingTvSeries.execute())
+          .thenAnswer((_) async => Left(ServerFailure('')));
+      return tvSeriesListBloc;
+    },
+    act: (bloc) => bloc.add(OnFetchTvSeries()),
+    expect: () => [
+      TvSeriesListLoading(),
+      TvSeriesListError(''),
+    ],
+    verify: (bloc) {
+      verify(mockGetNowPlayingTvSeries.execute());
+      verify(mockGetTopRatedTvSeries.execute());
+      verify(mockGetPopularTvSeries.execute());
+    },
+  );
+  blocTest<TvSeriesListBloc, TvSeriesListState>(
+    'Should emit [Loading, Error] when TvSeries popular data is failed ',
+    build: () {
+      when(mockGetTopRatedTvSeries.execute())
+          .thenAnswer((_) async => Right(testTvSeriesList));
+      when(mockGetPopularTvSeries.execute())
+          .thenAnswer((_) async => Left(ServerFailure('')));
+      when(mockGetNowPlayingTvSeries.execute())
+          .thenAnswer((_) async => Right(testTvSeriesList));
+      return tvSeriesListBloc;
+    },
+    act: (bloc) => bloc.add(OnFetchTvSeries()),
+    expect: () => [
+      TvSeriesListLoading(),
+      TvSeriesListError(''),
+    ],
+    verify: (bloc) {
+      verify(mockGetNowPlayingTvSeries.execute());
+      verify(mockGetTopRatedTvSeries.execute());
+      verify(mockGetPopularTvSeries.execute());
+    },
+  );
+  blocTest<TvSeriesListBloc, TvSeriesListState>(
+    'Should emit [Loading, Error] when TvSeries top rated data is failed ',
     build: () {
       when(mockGetTopRatedTvSeries.execute())
           .thenAnswer((_) async => Left(ServerFailure('')));
       when(mockGetPopularTvSeries.execute())
-          .thenAnswer((_) async => Left(ServerFailure('')));
+          .thenAnswer((_) async => Right(testTvSeriesList));
       when(mockGetNowPlayingTvSeries.execute())
-          .thenAnswer((_) async => Left(ServerFailure('')));
+          .thenAnswer((_) async => Right(testTvSeriesList));
       return tvSeriesListBloc;
     },
     act: (bloc) => bloc.add(OnFetchTvSeries()),

@@ -10,12 +10,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WatchlistButtonBloc
     extends Bloc<WatchlistButtonEvent, WatchlistButtonState> {
+  final GetMovieWatchListStatus getMovieWatchListStatus;
+  final GetTvSeriesWatchListStatus getTvSeriesWatchlistStatus;
   final SaveMovieWatchlist saveMovieWatchlist;
   final RemoveMovieWatchlist removeMovieWatchlist;
-  final GetMovieWatchListStatus getMovieWatchListStatus;
   final SaveTvSeriesWatchlist saveTvSeriesWatchlist;
   final RemoveTvSeriesWatchlist removeTvSeriesWatchlist;
-  final GetTvSeriesWatchListStatus getTvSeriesWatchlistStatus;
 
   WatchlistButtonBloc({
     required this.saveMovieWatchlist,

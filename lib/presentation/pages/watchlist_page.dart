@@ -1,10 +1,13 @@
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/common/utils.dart';
-import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
-import 'package:ditonton/presentation/provider/watchlist_tv_series_notifier.dart';
+import 'package:ditonton/presentation/bloc/movie/watchlist_movie_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/watchlist_movie_event.dart';
+import 'package:ditonton/presentation/bloc/movie/watchlist_movie_state.dart';
+import 'package:ditonton/presentation/bloc/tv_series/watchlist_tv_series_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_series/watchlist_tv_series_event.dart';
+import 'package:ditonton/presentation/bloc/tv_series/watchlist_tv_series_state.dart';
 import 'package:ditonton/presentation/widgets/content_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WatchlistPage extends StatefulWidget {
   static const ROUTE_NAME = '/watchlist-movie';
@@ -17,12 +20,8 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<WatchlistMovieNotifier>(context, listen: false)
-            .fetchWatchlistMovies());
-    Future.microtask(() =>
-        Provider.of<WatchlistTvSeriesNotifier>(context, listen: false)
-            .fetchWatchlistTvSeries());
+    context.read<WatchlistMoviesBloc>().add(OnFetchWatchlistMovies());
+    context.read<WatchlistTvSeriesBloc>().add(OnFetchWatchlistTvSeries());
   }
 
   @override
@@ -32,10 +31,8 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
   }
 
   void didPopNext() {
-    Provider.of<WatchlistMovieNotifier>(context, listen: false)
-        .fetchWatchlistMovies();
-    Provider.of<WatchlistTvSeriesNotifier>(context, listen: false)
-        .fetchWatchlistTvSeries();
+    context.read<WatchlistMoviesBloc>().add(OnFetchWatchlistMovies());
+    context.read<WatchlistTvSeriesBloc>().add(OnFetchWatchlistTvSeries());
   }
 
   @override
@@ -46,46 +43,61 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer2<WatchlistMovieNotifier, WatchlistTvSeriesNotifier>(
-          builder: (_, movieData, tvSeriesData, __) {
-            final movie = movieData.watchlistMovies;
-            final tvSeries = tvSeriesData.watchlistTvSeries;
-            final List<dynamic> result = [...movie, ...tvSeries];
-
-            if (movieData.watchlistState == RequestState.loading) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (movieData.watchlistState == RequestState.loaded) {
-              if (result.length != 0) {
-                return ListView.builder(
-                  itemBuilder: (_, index) {
-                    final content = result[index];
-                    return ContentCardList(content);
-                  },
-                  itemCount: result.length,
-                );
-              } else {
+        child: BlocBuilder<WatchlistMoviesBloc, WatchlistMoviesState>(
+          builder: (_, movieState) {
+            return BlocBuilder<WatchlistTvSeriesBloc, WatchlistTvSeriesState>(
+                builder: (_, tvSeriesState) {
+              if (movieState is WatchlistMoviesLoading &&
+                  tvSeriesState is WatchlistTvSeriesLoading) {
                 return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
-                      Icon(
-                        Icons.credit_card_off_sharp,
-                        size: 150,
-                        color: Color(0x34CECECE),
-                      ),
-                      Text('No Watchlist'),
-                    ],
-                  ),
+                  child: CircularProgressIndicator(),
                 );
+              } else if (movieState is WatchlistMoviesHasData &&
+                  tvSeriesState is WatchlistTvSeriesHasData) {
+                final List<dynamic> result = [
+                  ...movieState.watchlistMovies,
+                  ...tvSeriesState.watchlistMovies
+                ];
+                if (result.length != 0) {
+                  return ListView.builder(
+                    itemBuilder: (_, index) {
+                      final content = result[index];
+                      return ContentCardList(content);
+                    },
+                    itemCount: result.length,
+                  );
+                } else {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const <Widget>[
+                        Icon(
+                          Icons.credit_card_off_sharp,
+                          size: 150,
+                          color: Color(0x34CECECE),
+                        ),
+                        Text('No Watchlist'),
+                      ],
+                    ),
+                  );
+                }
+
+                /// When error
+              } else if (movieState is WatchlistMoviesError) {
+                return Center(
+                  key: Key('error_message'),
+                  child: Text(movieState.message),
+                );
+              } else if (tvSeriesState is WatchlistTvSeriesError) {
+                return Center(
+                    key: Key('error_message'),
+                    child: Text(tvSeriesState.message));
+
+                /// When empty
+              } else {
+                return Center();
               }
-            } else {
-              return Center(
-                key: Key('error_message'),
-                child: Text(movieData.message),
-              );
-            }
+            });
           },
         ),
       ),

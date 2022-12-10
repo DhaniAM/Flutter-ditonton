@@ -7,8 +7,6 @@ abstract class WatchlistButtonState extends Equatable {
   List<Object> get props => [];
 }
 
-class WatchlistButtonEmpty extends WatchlistButtonState {}
-
 class WatchlistButtonError extends WatchlistButtonState {
   final String message;
   WatchlistButtonError(this.message);

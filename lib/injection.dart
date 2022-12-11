@@ -76,7 +76,6 @@ void init() {
     () => MovieDetailBloc(
       getMovieDetail: locator(),
       getMovieRecommendations: locator(),
-      getMovieWatchListStatus: locator(),
     ),
   );
 
@@ -84,7 +83,6 @@ void init() {
     () => TvSeriesDetailBloc(
       getTvSeriesDetail: locator(),
       getTvSeriesRecommendations: locator(),
-      getTvSeriesWatchListStatus: locator(),
     ),
   );
 

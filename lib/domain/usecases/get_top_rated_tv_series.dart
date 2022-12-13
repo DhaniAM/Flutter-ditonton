@@ -8,7 +8,6 @@ class GetTopRatedTvSeries {
 
   GetTopRatedTvSeries(this.repository);
 
-  /// Call [TvSeriesRepository].getTopRatedTvSeries
   Future<Either<Failure, List<TvSeries>>> execute() {
     return repository.getTopRatedTvSeries();
   }

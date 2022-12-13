@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/data/repositories/tv_series_repository_impl.dart';
 import 'package:ditonton/domain/entities/tv_series_detail.dart';
 import 'package:ditonton/domain/repositories/tv_series_repository.dart';
 
@@ -9,7 +8,6 @@ class SaveTvSeriesWatchlist {
 
   SaveTvSeriesWatchlist(this.repository);
 
-  /// Call [TvSeriesRepositoryImpl].saveTvSeriesWatchlist(tvSeries)
   Future<Either<Failure, String>> execute(TvSeriesDetail tvSeries) {
     return repository.saveTvSeriesWatchlist(tvSeries);
   }

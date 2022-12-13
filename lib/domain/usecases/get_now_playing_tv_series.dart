@@ -8,7 +8,6 @@ class GetNowPlayingTvSeries {
 
   GetNowPlayingTvSeries(this.repository);
 
-  /// Call [TvSeriesRepository].getNowPlayingTvSeries
   Future<Either<Failure, List<TvSeries>>> execute() {
     return repository.getNowPlayingTvSeries();
   }

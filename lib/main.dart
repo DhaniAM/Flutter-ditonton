@@ -42,10 +42,10 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp());
+  runApp(Ditonton());
 }
 
-class MyApp extends StatelessWidget {
+class Ditonton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
